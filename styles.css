@@ -445,17 +445,17 @@ a {
   height: 100%;
 }
 
-/* Grand Bespoke Card Canvas — Fills the Viewport Elegantly with Zero Dead Space */
+/* Grand Bespoke Card Canvas — Fills the Viewport Elegantly & Perfectly Centered */
 .bespoke-card-canvas {
   position: relative;
-  width: min(96vw, 1460px);
-  max-width: 1460px;
-  height: calc(100vh - clamp(32px, 5vh, 64px));
-  min-height: clamp(580px, 88vh, 820px);
+  width: min(96vw, 1480px);
+  max-width: 1480px;
+  height: calc(100vh - clamp(20px, 3.5vh, 44px));
+  min-height: clamp(580px, 88vh, 840px);
   display: grid;
-  grid-template-columns: 1.08fr 1fr;
-  gap: clamp(24px, 3.5vw, 64px);
-  padding: clamp(14px, 2vh, 28px) clamp(20px, 3vw, 48px);
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(16px, 2.5vw, 44px);
+  padding: clamp(10px, 1.5vh, 24px) clamp(20px, 3vw, 44px);
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -483,7 +483,7 @@ a {
   filter: drop-shadow(0 6px 14px rgba(37, 57, 43, 0.12));
 }
 
-/* Left Column: Grand Organic Watercolor Artwork (Prominent, High-impact & Dissolving) */
+/* Left Column: Grand Organic Watercolor Artwork (Prominent, Larger & Dissolving Outer Edges) */
 .watercolor-portrait-column {
   display: flex;
   justify-content: center;
@@ -491,12 +491,13 @@ a {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .watercolor-portrait-wrapper {
   position: relative;
   width: 100%;
-  max-width: 620px;
+  max-width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -523,12 +524,12 @@ a {
   transform: rotate(-5deg) scale(1.02);
 }
 
-/* The Watercolor Couple Artwork Canvas — Majestic & Expansive */
+/* The Watercolor Couple Artwork Canvas — Majestic, Larger & Expansive */
 .watercolor-art-canvas {
   position: relative;
   width: 100%;
   height: 100%;
-  max-height: clamp(500px, 82vh, 760px);
+  max-height: clamp(540px, 88vh, 840px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -537,21 +538,25 @@ a {
 .watercolor-couple-img {
   width: 100%;
   height: 100%;
-  max-height: clamp(480px, 80vh, 740px);
+  max-height: clamp(540px, 88vh, 840px);
   object-fit: contain;
   object-position: center;
   mix-blend-mode: multiply;
-  filter: contrast(104%) saturate(108%) brightness(99%);
+  filter: contrast(105%) saturate(108%) brightness(99%);
+  transform: scale(1.06);
   transition: transform 5s ease;
+  -webkit-mask-image: radial-gradient(ellipse 96% 96% at 50% 50%, black 82%, rgba(0,0,0,0.6) 94%, transparent 100%);
+  mask-image: radial-gradient(ellipse 96% 96% at 50% 50%, black 82%, rgba(0,0,0,0.6) 94%, transparent 100%);
 }
 
 .watercolor-portrait-wrapper:hover .watercolor-couple-img {
-  transform: scale(1.025);
+  transform: scale(1.09);
 }
 
 .watercolor-blend-glow {
   position: absolute;
-  inset: 0;
+  inset: -25px;
+  background: radial-gradient(ellipse 95% 95% at 50% 50%, rgba(250, 245, 236, 0) 78%, rgba(250, 245, 236, 0.45) 94%, var(--canvas-bg) 100%);
   pointer-events: none;
 }
 
