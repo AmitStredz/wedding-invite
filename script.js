@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       gatefoldCover.classList.add('is-dismissed');
     }, 2400);
+
+    // Re-verify scratch card canvas dimensions once layout settles
+    setTimeout(() => {
+      if (!hasRevealed) initLuxuryScratchCard();
+    }, 400);
   }
 
   if (sealBtn) {
@@ -42,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ═══════════════════════════════════════════════════════════
-     2. LUXURY GOLD SCRATCH CARD CANVAS
+     2. LUXURY GOLD SCRATCH CARD CANVAS (Royal Folio Veil)
      ═══════════════════════════════════════════════════════════ */
   const scratchCanvas = $('#luxuryScratchCanvas');
   const scratchHolder = $('#scratchHolder');
@@ -58,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!scratchCanvas || !scratchHolder) return;
 
     const rect = scratchHolder.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     
     scratchCanvas.width = rect.width * dpr;
@@ -70,54 +77,139 @@ document.addEventListener('DOMContentLoaded', () => {
     const h = rect.height;
     totalPixels = w * h;
 
-    // Draw rich metallic gold leaf foil background
+    // Reset composite operation to source-over for painting the gilded veil
+    scratchCtx.globalCompositeOperation = 'source-over';
+    scratchCtx.globalAlpha = 1;
+
+    // 1. Draw rich metallic gold leaf foil background (Multi-stop liquid 24K gold)
     const goldGrad = scratchCtx.createLinearGradient(0, 0, w, h);
-    goldGrad.addColorStop(0, '#F5DE98');
-    goldGrad.addColorStop(0.25, '#D8B257');
-    goldGrad.addColorStop(0.5, '#BE9033');
-    goldGrad.addColorStop(0.75, '#E5C77A');
-    goldGrad.addColorStop(1, '#9C721D');
-    
+    goldGrad.addColorStop(0.00, '#FFF5D6');
+    goldGrad.addColorStop(0.18, '#F0D48D');
+    goldGrad.addColorStop(0.36, '#C99D3E');
+    goldGrad.addColorStop(0.52, '#FBE7BA');
+    goldGrad.addColorStop(0.70, '#B88B2A');
+    goldGrad.addColorStop(0.88, '#E8C97E');
+    goldGrad.addColorStop(1.00, '#8E6717');
     scratchCtx.fillStyle = goldGrad;
     scratchCtx.fillRect(0, 0, w, h);
 
-    // Add gold dust grain & glitter specks
+    // 2. Diagonal Metallic Luster Reflection Sheen
+    const sheenGrad = scratchCtx.createLinearGradient(0, 0, w, h);
+    sheenGrad.addColorStop(0.0, 'rgba(255, 255, 255, 0.0)');
+    sheenGrad.addColorStop(0.3, 'rgba(255, 255, 255, 0.22)');
+    sheenGrad.addColorStop(0.48, 'rgba(255, 255, 255, 0.42)');
+    sheenGrad.addColorStop(0.6, 'rgba(255, 255, 255, 0.12)');
+    sheenGrad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
+    scratchCtx.fillStyle = sheenGrad;
+    scratchCtx.fillRect(0, 0, w, h);
+
+    // 3. Authentic 24K Handcrafted Gold Leaf Micro-Glitter Stippling
     scratchCtx.globalAlpha = 0.22;
-    for (let i = 0; i < 2400; i++) {
+    const speckCount = Math.min(3000, Math.floor((w * h) / 130));
+    for (let i = 0; i < speckCount; i++) {
       const rx = Math.random() * w;
       const ry = Math.random() * h;
-      const rsize = Math.random() * 2 + 0.5;
-      scratchCtx.fillStyle = (i % 3 === 0) ? '#FFFFFF' : '#FFF3D1';
+      const rsize = Math.random() * 2.2 + 0.6;
+      scratchCtx.fillStyle = (i % 4 === 0) ? '#FFFFFF' : ((i % 2 === 0) ? '#FFF0C2' : '#8A6214');
       scratchCtx.fillRect(rx, ry, rsize, rsize);
     }
 
-    // Elegant Ornate Double Border on the Foil
-    scratchCtx.globalAlpha = 0.85;
+    // 4. Ornate Royal Filigree Borders & Fleurons
+    scratchCtx.globalAlpha = 0.9;
     scratchCtx.strokeStyle = '#FFFFFF';
     scratchCtx.lineWidth = 1.5;
     scratchCtx.strokeRect(14, 14, w - 28, h - 28);
-    scratchCtx.strokeStyle = '#6E4E10';
-    scratchCtx.strokeRect(18, 18, w - 36, h - 36);
 
-    // Central Royal Seal Emblem on Foil
+    scratchCtx.strokeStyle = '#6E4E10';
+    scratchCtx.lineWidth = 1.2;
+    scratchCtx.strokeRect(20, 20, w - 40, h - 40);
+
+    scratchCtx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+    scratchCtx.lineWidth = 1;
+    if (scratchCtx.setLineDash) scratchCtx.setLineDash([4, 4]);
+    scratchCtx.strokeRect(25, 25, w - 50, h - 50);
+    if (scratchCtx.setLineDash) scratchCtx.setLineDash([]);
+
+    // 4 Corner Fleurons (✦)
     scratchCtx.fillStyle = '#FFFFFF';
-    scratchCtx.font = '600 13px Cinzel, serif';
+    scratchCtx.font = '14px serif';
     scratchCtx.textAlign = 'center';
     scratchCtx.textBaseline = 'middle';
-    scratchCtx.letterSpacing = '3px';
-    scratchCtx.fillText('✦ SACRED DATE ✦', w / 2, h / 2 - 38);
+    scratchCtx.fillText('✦', 22, 22);
+    scratchCtx.fillText('✦', w - 22, 22);
+    scratchCtx.fillText('✦', 22, h - 22);
+    scratchCtx.fillText('✦', w - 22, h - 22);
 
-    // Big Script Callout
-    scratchCtx.fillStyle = '#261B06';
-    scratchCtx.font = '400 36px "Alex Brush", cursive';
-    scratchCtx.fillText('Scratch with Love', w / 2, h / 2 + 6);
+    // 5. Central Royal Medallion / Heraldic Plaque
+    const cx = w / 2;
+    const cy = h / 2;
+    const isMobile = w < 640;
 
-    // Helper tap instruction
+    const cardW = Math.min(w - 60, isMobile ? 320 : 540);
+    const cardH = Math.min(h - 70, isMobile ? 230 : 250);
+    const cardX = cx - cardW / 2;
+    const cardY = cy - cardH / 2;
+
+    function drawRoundedBox(ctx, bx, by, bw, bh, r) {
+      ctx.beginPath();
+      if (typeof ctx.roundRect === 'function') {
+        ctx.roundRect(bx, by, bw, bh, r);
+      } else {
+        ctx.rect(bx, by, bw, bh);
+      }
+    }
+
+    // Plaque Parchment & Gold Plate Background
+    scratchCtx.fillStyle = 'rgba(255, 252, 242, 0.38)';
+    drawRoundedBox(scratchCtx, cardX, cardY, cardW, cardH, 18);
+    scratchCtx.fill();
+
+    scratchCtx.strokeStyle = 'rgba(110, 78, 16, 0.65)';
+    scratchCtx.lineWidth = 1.5;
+    scratchCtx.stroke();
+
+    scratchCtx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+    scratchCtx.lineWidth = 1;
+    drawRoundedBox(scratchCtx, cardX + 5, cardY + 5, cardW - 10, cardH - 10, 14);
+    scratchCtx.stroke();
+
+    // Plaque Ornate Typography
+    // Arabic Bismillah
+    scratchCtx.fillStyle = '#4A3408';
+    scratchCtx.font = isMobile ? '600 13px "Cormorant Garamond", serif' : '600 16px "Cormorant Garamond", serif';
+    scratchCtx.fillText('بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', cx, cardY + (isMobile ? 26 : 32));
+
+    // Royal Kicker
     scratchCtx.fillStyle = '#FFFFFF';
-    scratchCtx.font = '500 10px Montserrat, sans-serif';
-    scratchCtx.fillText('RUB TO REVEAL THE NIKAH DATE', w / 2, h / 2 + 45);
+    scratchCtx.font = isMobile ? '700 9px Cinzel, serif' : '700 11px Cinzel, serif';
+    scratchCtx.fillText('✦ THE SACRED WEDDING CEREMONIES ✦', cx, cardY + (isMobile ? 52 : 62));
 
-    // Switch composite operation to erase
+    // Flowing Romantic Script Callout
+    scratchCtx.fillStyle = '#261B06';
+    scratchCtx.font = isMobile ? '400 32px "Alex Brush", cursive' : '400 42px "Alex Brush", cursive';
+    scratchCtx.fillText('Unveil the Auspicious Dates', cx, cardY + (isMobile ? 100 : 120));
+
+    // Monogram & Botanical Flourish
+    scratchCtx.fillStyle = '#4A3408';
+    scratchCtx.font = isMobile ? '600 12px Cinzel, serif' : '600 14px Cinzel, serif';
+    scratchCtx.fillText('❦  Fathima  &  Amalakar  ❦', cx, cardY + (isMobile ? 142 : 166));
+
+    // Interactive Guidance Badge
+    const pillW = isMobile ? 220 : 280;
+    const pillH = isMobile ? 28 : 32;
+    const pillY = cardY + (isMobile ? 184 : 208);
+    scratchCtx.fillStyle = 'rgba(37, 57, 43, 0.8)';
+    drawRoundedBox(scratchCtx, cx - pillW / 2, pillY - pillH / 2, pillW, pillH, 16);
+    scratchCtx.fill();
+    scratchCtx.strokeStyle = '#E5C77A';
+    scratchCtx.lineWidth = 1;
+    scratchCtx.stroke();
+
+    scratchCtx.fillStyle = '#FFF8E7';
+    scratchCtx.font = isMobile ? '700 9px Montserrat, sans-serif' : '700 10px Montserrat, sans-serif';
+    scratchCtx.fillText('✦ GENTLY BRUSH OR SWIPE TO REVEAL ✦', cx, pillY);
+
+    // 6. Switch Canvas Composite Operation to Erase Mode for Interactivity
     scratchCtx.globalAlpha = 1;
     scratchCtx.globalCompositeOperation = 'destination-out';
   }
@@ -137,16 +229,19 @@ document.addEventListener('DOMContentLoaded', () => {
   function scratchBrush(pos) {
     if (!scratchCtx || hasRevealed) return;
 
+    const isMobile = window.innerWidth < 640;
+    const brushWidth = isMobile ? 38 : 50;
+
     scratchCtx.beginPath();
     scratchCtx.lineCap = 'round';
     scratchCtx.lineJoin = 'round';
-    scratchCtx.lineWidth = 42; // Generous scratch tip
+    scratchCtx.lineWidth = brushWidth;
 
     if (lastPoint) {
       scratchCtx.moveTo(lastPoint.x, lastPoint.y);
       scratchCtx.lineTo(pos.x, pos.y);
     } else {
-      scratchCtx.arc(pos.x, pos.y, 21, 0, Math.PI * 2);
+      scratchCtx.arc(pos.x, pos.y, brushWidth / 2, 0, Math.PI * 2);
     }
     scratchCtx.stroke();
     lastPoint = pos;
@@ -175,11 +270,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const percent = Math.min(100, Math.round(ratio * 100));
 
     if (percentText) {
-      percentText.textContent = `${percent}% Revealed`;
+      percentText.textContent = `${percent}% Unveiled`;
     }
 
-    // Auto complete reveal when > 36%
-    if (ratio > 0.36) {
+    // Auto complete reveal when > 32%
+    if (ratio > 0.32) {
       revealFullDate();
     }
   }
@@ -189,16 +284,18 @@ document.addEventListener('DOMContentLoaded', () => {
     hasRevealed = true;
 
     if (scratchCanvas) {
-      scratchCanvas.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      scratchCanvas.style.transition = 'opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease';
       scratchCanvas.style.opacity = '0';
-      scratchCanvas.style.transform = 'scale(1.05)';
+      scratchCanvas.style.transform = 'scale(1.02)';
+      scratchCanvas.style.filter = 'blur(4px)';
+      scratchCanvas.style.pointerEvents = 'none';
       setTimeout(() => {
         scratchCanvas.style.display = 'none';
       }, 800);
     }
 
     if (percentText) {
-      percentText.textContent = '✦ Date Revealed with Love! ✦';
+      percentText.textContent = '✦ Sacred Dates & Ceremonies Revealed! ✦';
     }
 
     // Burst golden hearts and confetti
@@ -260,40 +357,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrolled = -rect.top;
     const progress = Math.max(0, Math.min(1, scrolled / totalDist));
 
-    // Smooth ease curve
+    // Smooth cubic ease curve
     const easeP = progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
 
     const vw = window.innerWidth;
     const isMobile = vw < 768;
-    const travelX = isMobile ? vw * 0.28 : vw * 0.22;
+    
+    // Starting distance and target meeting position (touching side by side without overlapping)
+    const startOffset = isMobile ? vw * 0.34 : vw * 0.25;
+    const targetOffset = isMobile ? 24 : 36;
 
-    // Bride Ring (starts left, moves to center)
-    const brideStartX = -travelX;
-    const brideStartY = -60;
-    const brideCurrentX = brideStartX + (travelX * easeP);
-    const brideCurrentY = brideStartY + (60 * easeP);
-    const brideRotate = -25 + (25 * easeP);
+    // Bride Ring (starts left with 3D Y-tilt, moves to center)
+    const brideCurrentX = -startOffset + ((startOffset - targetOffset) * easeP);
+    const brideRotateY = 28 * (1 - easeP);
+    const brideRotateZ = -10 * (1 - easeP);
 
-    // Groom Ring (starts right, moves to center and overlaps Bride Ring)
-    const groomStartX = travelX;
-    const groomStartY = 50;
-    const groomCurrentX = groomStartX - (travelX * easeP) - 15; // 15px interlocking offset
-    const groomCurrentY = groomStartY - (50 * easeP);
-    const groomRotate = 20 - (20 * easeP);
+    // Groom Ring (starts right with 3D Y-tilt, moves to center)
+    const groomCurrentX = startOffset - ((startOffset - targetOffset) * easeP);
+    const groomRotateY = -28 * (1 - easeP);
+    const groomRotateZ = 10 * (1 - easeP);
 
-    brideRing.style.transform = `translate3d(${brideCurrentX}px, ${brideCurrentY}px, 0) rotate(${brideRotate}deg) scale(${0.88 + easeP * 0.16})`;
-    groomRing.style.transform = `translate3d(${groomCurrentX}px, ${groomCurrentY}px, 0) rotate(${groomRotate}deg) scale(${0.88 + easeP * 0.16})`;
+    brideRing.style.transform = `translate3d(${brideCurrentX}px, 0, 0) rotateY(${brideRotateY}deg) rotateZ(${brideRotateZ}deg) scale(${0.85 + easeP * 0.18})`;
+    groomRing.style.transform = `translate3d(${groomCurrentX}px, 0, 0) rotateY(${groomRotateY}deg) rotateZ(${groomRotateZ}deg) scale(${0.85 + easeP * 0.18})`;
 
-    // Rings flare and photo backdrop when fully converged (> 85%)
-    if (progress > 0.82) {
-      ringSparkle.classList.add('is-active');
-      ringsPhotoBackdrop.style.opacity = `${(progress - 0.82) / 0.18}`;
-      ringsPhotoBackdrop.style.transform = `scale(${0.92 + (progress - 0.82) * 0.4})`;
-      unionStatus.classList.add('is-visible');
+    // Rings meet in center (> 78% scroll progress)
+    if (progress > 0.78) {
+      if (ringSparkle) ringSparkle.classList.add('is-active');
+      if (unionStatus) unionStatus.classList.add('is-visible');
     } else {
-      ringSparkle.classList.remove('is-active');
-      ringsPhotoBackdrop.style.opacity = '0';
-      unionStatus.classList.remove('is-visible');
+      if (ringSparkle) ringSparkle.classList.remove('is-active');
+      if (unionStatus) unionStatus.classList.remove('is-visible');
     }
   }
 

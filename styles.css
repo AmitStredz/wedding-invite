@@ -848,170 +848,300 @@ a {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   2B. DEDICATED CEREMONIES & VENUE DIRECTIONS SECTION
+   2. UNIFIED CEREMONIES & SACRED DATES UNVEILING SECTION
    ═══════════════════════════════════════════════════════════ */
-.events-venue-showcase-section {
+.ceremony-unveil-section {
   position: relative;
-  padding: 85px 24px 75px;
+  padding: 85px 24px 80px;
   background: 
-    radial-gradient(circle at 50% 15%, rgba(197, 155, 60, 0.12), transparent 50%),
+    radial-gradient(circle at 50% 12%, rgba(197, 155, 60, 0.12), transparent 55%),
+    radial-gradient(circle at 85% 85%, rgba(140, 163, 148, 0.12), transparent 50%),
     linear-gradient(180deg, var(--canvas-bg) 0%, var(--canvas-bg-warm) 50%, var(--canvas-bg) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  overflow: hidden;
 }
 
-.events-section-title {
+.unveil-section-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 2.7rem);
+  font-size: clamp(2rem, 4.2vw, 2.9rem);
   color: var(--sage-deep);
-  margin: 12px 0 6px;
+  margin: 12px 0 8px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-.events-section-subtitle {
-  font-size: 1rem;
+.unveil-section-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.8vw, 1.08rem);
   color: var(--ink-secondary);
-  max-width: 580px;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0 auto 36px;
 }
 
-.events-venue-container {
-  width: min(94vw, 980px);
-  margin: 36px auto 0;
+/* ─── Folio Interactive Stage ─── */
+.gilded-folio-stage {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* The Grand Luxury Keepsake Folio Container */
+.gilded-folio-container {
+  position: relative;
+  width: min(94vw, 940px);
+  border-radius: 24px;
+  background: #FFFFFF;
+  border: 2px solid var(--gold-ochre);
+  box-shadow: 
+    0 0 0 6px rgba(244, 232, 198, 0.45),
+    0 22px 55px rgba(37, 57, 43, 0.12),
+    0 0 28px rgba(197, 155, 60, 0.14);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Folio Content Layer Beneath Gold Foil */
+.ceremonial-folio-content {
+  position: relative;
+  width: 100%;
+  background: 
+    radial-gradient(circle at 50% 0%, #FFFDF9 0%, #FAF6EE 100%);
+  padding: 38px 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  z-index: 1;
+}
+
+/* Top Cameo Header: Couple Portrait & Quranic Blessing */
+.folio-cameo-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1.2px dashed rgba(197, 155, 60, 0.4);
+}
+
+.cameo-portrait-circle {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  min-width: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2.5px solid var(--gold-ochre);
+  box-shadow: 
+    0 6px 18px rgba(37, 57, 43, 0.16),
+    0 0 16px rgba(197, 155, 60, 0.35);
+  background: var(--canvas-bg-warm);
+}
+
+.cameo-couple-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  transform: scale(1.12);
+  filter: contrast(105%) brightness(102%) saturate(106%);
+}
+
+.cameo-text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 4px;
+}
+
+.cameo-bismillah {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--gold-ochre-dark);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.cameo-quran-verse {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--sage-deep);
+  margin: 0;
+}
+
+/* Two-Wing Ceremonies Display Grid */
+.folio-ceremonies-wings {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
   gap: 24px;
 }
 
-.showcase-ceremonies-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
-}
-
-.showcase-event-card {
+.ceremony-wing-card {
   background: #FFFFFF;
-  border: 1.2px solid var(--gold-ochre);
-  border-radius: 14px;
-  padding: 30px 24px;
+  border: 1.2px solid rgba(197, 155, 60, 0.45);
+  border-radius: 18px;
+  padding: 28px 24px;
   text-align: center;
-  box-shadow: 0 10px 28px rgba(37, 57, 43, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(37, 57, 43, 0.05);
+  position: relative;
+  overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.showcase-event-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(37, 57, 43, 0.12), 0 0 20px rgba(197, 155, 60, 0.15);
+.ceremony-wing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-ochre), transparent);
 }
 
-.showcase-event-card--nikah {
-  background: #FFFFFF;
+.ceremony-wing-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(37, 57, 43, 0.1), 0 0 16px rgba(197, 155, 60, 0.15);
+}
+
+.ceremony-wing-card--nikah {
   border: 1.8px solid var(--gold-ochre);
-  box-shadow: 0 12px 32px rgba(37, 57, 43, 0.09), inset 0 0 15px rgba(244, 232, 198, 0.3);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FDF9F0 100%);
+  box-shadow: 0 10px 28px rgba(37, 57, 43, 0.08), inset 0 0 24px rgba(244, 232, 198, 0.3);
 }
 
-.event-icon-badge {
+.wing-icon-badge {
   font-size: 2rem;
-  margin-bottom: 8px;
-}
-
-.showcase-badge {
-  font-family: var(--font-title);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: var(--gold-ochre-dark);
-  text-transform: uppercase;
-  display: block;
   margin-bottom: 6px;
 }
 
-.showcase-date {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  color: var(--sage-deep);
-  margin-bottom: 4px;
+.wing-badge {
+  font-family: var(--font-title);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--gold-ochre-dark);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
 }
 
-.showcase-time {
+.wing-date {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--sage-deep);
+  margin: 0 0 4px;
+}
+
+.wing-time {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   font-weight: 600;
   color: var(--gold-ochre-dark);
+  margin-bottom: 2px;
 }
 
-.showcase-hijri {
+.wing-hijri {
   font-family: var(--font-serif);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-style: italic;
   color: var(--ink-muted);
-  margin-top: 3px;
+  margin-bottom: 6px;
 }
 
-.showcase-loc {
-  font-size: 0.95rem;
+.wing-loc {
+  font-size: 0.98rem;
+  font-weight: 500;
   color: var(--ink-primary);
   margin: 8px 0 6px;
 }
 
-.showcase-note {
+.wing-note {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--ink-muted);
+  line-height: 1.45;
+  margin: 0;
 }
 
-/* Venue Location Card */
-.showcase-venue-card {
-  background: #FFFFFF;
-  border: 1.5px solid var(--gold-ochre);
-  border-radius: 16px;
-  padding: 32px 24px;
-  box-shadow: 0 12px 30px rgba(37, 57, 43, 0.08);
+/* Wing Floral Divider in Center */
+.wings-floral-divider {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  gap: 12px;
+  color: var(--gold-ochre);
 }
 
-.venue-grand-header {
+.divider-line {
+  width: 1px;
+  height: 100%;
+  min-height: 60px;
+  background: linear-gradient(180deg, transparent, var(--gold-ochre), transparent);
+  opacity: 0.6;
+}
+
+.divider-emblem {
+  font-size: 1.15rem;
+  letter-spacing: 0.15em;
+}
+
+/* Folio Bottom Venue Bar */
+.folio-venue-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 22px;
+  border-top: 1.2px dashed rgba(197, 155, 60, 0.4);
+  flex-wrap: wrap;
+}
+
+.venue-info-inline {
   display: flex;
   align-items: center;
   gap: 16px;
   text-align: left;
 }
 
-.venue-crown-icon {
-  font-size: 2.4rem;
-}
-
-.venue-kicker {
-  font-family: var(--font-title);
-  font-size: 0.68rem;
-  letter-spacing: 0.25em;
+.venue-pin-icon {
+  font-size: 2rem;
   color: var(--gold-ochre-dark);
-  font-weight: 700;
-  text-transform: uppercase;
+}
+
+.venue-inline-text strong {
   display: block;
-}
-
-.venue-main-name {
   font-family: var(--font-display);
-  font-size: 1.85rem;
+  font-size: 1.25rem;
   color: var(--sage-deep);
-  margin: 2px 0 4px;
 }
 
-.venue-sub-addr {
-  font-size: 1rem;
+.venue-inline-text span {
+  font-size: 0.95rem;
   color: var(--ink-secondary);
 }
 
-.btn-grand-directions {
+.btn-folio-directions {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
+  gap: 8px;
+  padding: 13px 26px;
   background: linear-gradient(135deg, var(--sage-deep) 0%, var(--sage-primary) 100%);
   color: #FFF;
   font-family: var(--font-title);
@@ -1020,282 +1150,31 @@ a {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   border-radius: 35px;
-  border: 1px solid var(--gold-ochre);
+  border: 1.2px solid var(--gold-ochre);
   text-decoration: none;
   box-shadow: 0 8px 20px rgba(37, 57, 43, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.btn-grand-directions:hover {
-  transform: translateY(-2px) scale(1.02);
+.btn-folio-directions:hover {
+  transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(37, 57, 43, 0.3);
+  background: var(--sage-deep);
+  color: #FFF8E7;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   3. CREATIVE DATE REVEAL WITH REAL COUPLE PHOTO (couple-real.jpg)
-   ═══════════════════════════════════════════════════════════ */
-.creative-date-reveal-section {
-  position: relative;
-  padding: 90px 24px 80px;
-  background: 
-    radial-gradient(circle at 50% 30%, rgba(197, 155, 60, 0.12), transparent 50%),
-    linear-gradient(180deg, var(--canvas-bg) 0%, var(--canvas-bg-warm) 50%, var(--canvas-bg) 100%);
-  color: var(--ink-primary);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-}
-
-.section-tag-pill {
-  display: inline-block;
-  font-family: var(--font-title);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold-ochre-dark);
-  margin-bottom: 12px;
-}
-
-.section-tag-pill--light {
-  color: var(--gold-ochre-dark);
-}
-
-.reveal-section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 600;
-  color: var(--sage-deep);
-  margin-bottom: 8px;
-}
-
-.reveal-section-subtitle {
-  max-width: 540px;
-  font-size: 1.05rem;
-  color: var(--ink-secondary);
-  margin-bottom: 35px;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   3. BESPOKE ARTISTIC DATE REVEAL (Keepsake Portrait + Plaque)
-   ═══════════════════════════════════════════════════════════ */
-.scratch-artistic-stage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-}
-
-/* The Luxury Archival Keepsake Card Container */
-.artistic-scratch-container {
-  position: relative;
-  width: min(90vw, 380px);
-  height: 560px;
-  border-radius: 24px;
-  background: #FFFFFF;
-  border: 3.5px solid var(--gold-ochre);
-  box-shadow: 
-    0 20px 50px rgba(37, 57, 43, 0.12),
-    0 0 25px rgba(197, 155, 60, 0.15);
-  overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* Bespoke Couple Keepsake Layer Beneath Gold Foil */
-.bespoke-couple-keepsake {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  background: var(--canvas-bg);
-}
-
-/* Upper Portrait Window (Unobstructed faces!) */
-.keepsake-portrait-window {
-  position: relative;
-  width: 100%;
-  height: 58%;
-  overflow: hidden;
-  border-bottom: 2px solid var(--gold-ochre);
-  background: var(--canvas-bg-warm);
-}
-
-.portrait-crop-wrapper {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-/* Zoom past outer frame of couple-real.jpg, focusing on their radiant smiles */
-.keepsake-couple-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 28%;
-  filter: contrast(105%) brightness(102%) saturate(108%);
-  transform: scale(1.08); /* Zoom past mockup frame edges */
-  transition: transform 6s ease;
-}
-
-.artistic-scratch-container:hover .keepsake-couple-img {
-  transform: scale(1.12);
-}
-
-.portrait-sun-glow {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 45% 30%, rgba(255, 235, 170, 0.22), transparent 65%),
-    linear-gradient(180deg, transparent 65%, rgba(37, 57, 43, 0.25) 100%);
-  pointer-events: none;
-}
-
-.portrait-ornate-rim {
-  position: absolute;
-  inset: 8px 8px 0 8px;
-  border: 1px solid rgba(197, 155, 60, 0.35);
-  border-bottom: none;
-  border-radius: 16px 16px 0 0;
-  pointer-events: none;
-}
-
-/* Floating Heart Sparkles around their heart sunglasses */
-.sunglasses-heart-sparkle {
-  position: absolute;
-  font-size: 1.2rem;
-  color: var(--festive-rose);
-  text-shadow: 0 0 10px rgba(184, 101, 110, 0.6), 0 0 20px rgba(197, 155, 60, 0.4);
-  pointer-events: none;
-  z-index: 5;
-  animation: heartFloat 2.4s ease-in-out infinite alternate;
-}
-
-.left-sparkle {
-  top: 48%;
-  left: 36%;
-}
-
-.right-sparkle {
-  top: 38%;
-  right: 32%;
-  animation-delay: 1.2s;
-}
-
-@keyframes heartFloat {
-  0% { transform: scale(0.9) translateY(0); opacity: 0.6; }
-  100% { transform: scale(1.25) translateY(-5px); opacity: 1; }
-}
-
-/* Bottom Ceremony Date Plaque */
-.keepsake-date-plaque {
-  position: relative;
-  width: 100%;
-  height: 42%;
-  background: #FFFFFF;
-  padding: 12px 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.plaque-inner-rule {
-  width: 100%;
-  border: 1px solid var(--gold-ochre);
-  border-radius: 12px;
-  padding: 10px 14px;
-  background: var(--canvas-bg);
-}
-
-.plaque-kicker {
-  font-family: var(--font-title);
-  font-size: 0.64rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold-ochre-dark);
-  font-weight: 700;
-  display: block;
-}
-
-.plaque-date-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: 4px 0 2px;
-}
-
-.plaque-day-number {
-  font-family: var(--font-display);
-  font-size: 3.4rem;
-  line-height: 0.85;
-  font-weight: 700;
-  color: var(--gold-ochre-dark);
-}
-
-.plaque-month-year {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-
-.plaque-month {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--sage-deep);
-}
-
-.plaque-year {
-  font-family: var(--font-title);
+.btn-folio-directions i {
+  font-style: normal;
   font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--sage-deep);
+  transition: transform 0.2s ease;
 }
 
-.plaque-timing-badge {
-  display: inline-block;
-  padding: 3px 12px;
-  background: var(--sage-wash);
-  color: var(--sage-deep);
-  border: 1px solid var(--gold-ochre);
-  border-radius: 20px;
-  font-family: var(--font-title);
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 3px 0 4px;
+.btn-folio-directions:hover i {
+  transform: translate(2px, -2px);
 }
 
-.plaque-venue-line {
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--ink-primary);
-}
-
-.venue-pin {
-  font-size: 0.75rem;
-}
-
-.plaque-quran-verse {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.78rem;
-  color: var(--ink-muted);
-  margin-top: 4px;
-}
-
-/* Canvas Scratch Foil Layer On Top */
-.scratch-canvas-el {
+/* ─── Luxury Gilded Canvas Overlay ─── */
+.gilded-canvas-overlay {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1303,48 +1182,55 @@ a {
   cursor: grab;
   touch-action: none;
   z-index: 10;
-  transition: opacity 0.8s ease;
+  border-radius: inherit;
+  transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
 }
 
-.scratch-canvas-el:active {
+.gilded-canvas-overlay:active {
   cursor: grabbing;
 }
 
-/* Status Bar & Quick Reveal */
+/* ─── Folio Interactive Status Bar & Quick Reveal ─── */
 .scratch-status-bar {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 20px;
   font-family: var(--font-title);
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   color: var(--ink-secondary);
+  flex-wrap: wrap;
 }
 
 .sparkle-icon {
   color: var(--gold-ochre);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   animation: spinSlow 6s linear infinite;
 }
 
 .btn-quick-reveal {
   background: var(--sage-deep);
-  border: 1px solid var(--gold-ochre);
+  border: 1.2px solid var(--gold-ochre);
   color: #FFF;
-  padding: 6px 14px;
+  padding: 8px 18px;
   border-radius: 20px;
   font-family: var(--font-title);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 700;
   cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 57, 43, 0.15);
   transition: all 0.3s ease;
 }
 
 .btn-quick-reveal:hover {
   background: var(--gold-ochre);
   color: var(--sage-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(197, 155, 60, 0.3);
 }
 
 @keyframes spinSlow {
@@ -1565,69 +1451,31 @@ a {
 
 .rings-arena {
   position: relative;
-  width: min(90vw, 680px);
-  height: 380px;
+  width: min(92vw, 720px);
+  height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.rings-photo-backdrop {
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  box-shadow: 0 20px 50px rgba(37, 57, 43, 0.15);
-}
-
-.hands-bg-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: contrast(105%) saturate(85%) brightness(95%);
-}
-
-.photo-warm-glow {
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 50% 50%, rgba(197, 155, 60, 0.2), transparent 70%),
-    linear-gradient(180deg, rgba(250, 245, 236, 0.2) 0%, rgba(37, 57, 43, 0.3) 100%);
+  perspective: 1200px;
 }
 
 .ring-entity {
   position: absolute;
-  width: clamp(140px, 20vw, 210px);
-  height: clamp(140px, 20vw, 210px);
+  width: clamp(140px, 22vw, 240px);
+  height: clamp(120px, 18vw, 200px);
   z-index: 10;
   will-change: transform;
-  filter: drop-shadow(0 14px 24px rgba(37, 57, 43, 0.2));
   display: flex;
   flex-direction: column;
   align-items: center;
+  filter: drop-shadow(0 14px 28px rgba(37, 57, 43, 0.22));
 }
 
-.ring-svg {
+.ring-real-img {
   width: 100%;
   height: 100%;
-}
-
-.ring-owner-tag {
-  margin-top: 6px;
-  font-family: var(--font-title);
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--sage-deep);
-  font-weight: 700;
-  background: #FFFFFF;
-  border: 1.2px solid var(--gold-ochre);
-  padding: 3px 12px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(37, 57, 43, 0.08);
+  object-fit: contain;
+  filter: contrast(106%) brightness(102%) saturate(108%);
 }
 
 .ring-interlock-sparkle {
@@ -1957,18 +1805,47 @@ a {
     width: 95px;
   }
 
-  .showcase-ceremonies-grid {
+  .folio-ceremonies-wings {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .wings-floral-divider {
+    flex-direction: row;
+    margin: 4px 0;
+  }
+
+  .divider-line {
+    width: 60px;
+    height: 1px;
+    min-height: 0;
+    background: linear-gradient(90deg, transparent, var(--gold-ochre), transparent);
+  }
+
+  .folio-cameo-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .cameo-text-wrap {
+    align-items: center;
+    text-align: center;
+  }
+
+  .folio-venue-footer {
+    flex-direction: column;
+    text-align: center;
     gap: 16px;
   }
 
-  .venue-grand-header {
+  .venue-info-inline {
     flex-direction: column;
     text-align: center;
-    gap: 10px;
+    gap: 8px;
   }
 
-  .btn-grand-directions {
+  .btn-folio-directions {
     width: 100%;
     justify-content: center;
   }
@@ -2008,21 +1885,40 @@ a {
     font-size: 0.78rem;
   }
 
-  .artistic-scratch-container {
-    width: 92vw;
-    height: 520px;
+  .ceremonial-folio-content {
+    padding: 24px 16px 20px;
+    gap: 20px;
   }
 
-  .plaque-day-number {
-    font-size: 2.8rem;
+  .cameo-portrait-circle {
+    width: 74px;
+    height: 74px;
+    min-width: 74px;
   }
 
-  .plaque-month {
-    font-size: 1.1rem;
+  .cameo-bismillah {
+    font-size: 1.15rem;
   }
 
-  .person-display-name {
-    font-size: 2.8rem;
+  .cameo-quran-verse {
+    font-size: 0.92rem;
+  }
+
+  .ceremony-wing-card {
+    padding: 22px 16px;
+  }
+
+  .wing-date {
+    font-size: 1.25rem;
+  }
+
+  .wing-time {
+    font-size: 1.05rem;
+  }
+
+  .scratch-status-bar {
+    flex-direction: column;
+    gap: 8px;
   }
 }
 
