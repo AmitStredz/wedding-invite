@@ -78,69 +78,6 @@ a {
   z-index: 999;
 }
 
-/* ─── MUSIC TOGGLE PILL ─── */
-.music-pill {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 16px;
-  border-radius: 40px;
-  background: rgba(20, 40, 29, 0.85);
-  border: 1px solid var(--royal-gold);
-  color: var(--royal-gold-light);
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(203, 162, 72, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.music-pill:hover {
-  transform: scale(1.05);
-  background: rgba(28, 56, 41, 0.95);
-}
-
-.music-wave {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 14px;
-}
-
-.music-wave i {
-  width: 2.5px;
-  height: 100%;
-  background: var(--royal-gold-light);
-  border-radius: 2px;
-  animation: equalize 0.9s ease-in-out infinite alternate;
-}
-
-.music-wave i:nth-child(1) { height: 40%; animation-delay: 0.1s; }
-.music-wave i:nth-child(2) { height: 90%; animation-delay: 0.3s; }
-.music-wave i:nth-child(3) { height: 60%; animation-delay: 0.2s; }
-.music-wave i:nth-child(4) { height: 100%; animation-delay: 0.4s; }
-
-.music-pill.is-muted .music-wave i {
-  animation: none;
-  height: 3px;
-  opacity: 0.5;
-}
-
-.music-txt {
-  font-family: var(--font-title);
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-@keyframes equalize {
-  0% { transform: scaleY(0.2); }
-  100% { transform: scaleY(1); }
-}
 
 /* ═══════════════════════════════════════════════════════════
    1. ROYAL GATEFOLD ENVELOPE & CURTAINS

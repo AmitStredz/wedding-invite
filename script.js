@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const gatefoldCover   = $('#gatefoldCover');
   const sealBtn         = $('#sealBtn');
   const mainExperience  = $('#mainExperience');
-  const musicBtn        = $('#musicBtn');
 
   let isCoverOpened = false;
 
@@ -43,9 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 120, behavior: 'smooth' });
       }
     }, 3200);
-
-    // Start ambient soft audio if not already enabled
-    startAmbientMelody();
   }
 
   if (sealBtn) {
@@ -457,69 +453,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAmbParticles();
   }
 
-  /* ═══════════════════════════════════════════════════════════
-     7. SOFT AMBIENT AUDIO (Web Audio Synthesizer)
-     ═══════════════════════════════════════════════════════════ */
-  let audioCtx = null;
-  let isMusicPlaying = false;
-  let synthGain = null;
-
-  function startAmbientMelody() {
-    if (isMusicPlaying) return;
-    try {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-
-      synthGain = audioCtx.createGain();
-      synthGain.gain.setValueAtTime(0, audioCtx.currentTime);
-      synthGain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 2); // Soft volume
-      synthGain.connect(audioCtx.destination);
-
-      // Warm harmonic chords (Diatonic Shehnai/Harp harmony simulation)
-      const freqs = [220, 277.18, 329.63, 440]; // A3, C#4, E4, A4 (Warm A Major)
-      freqs.forEach(f => {
-        const osc = audioCtx.createOscillator();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(f, audioCtx.currentTime);
-        osc.connect(synthGain);
-        osc.start();
-      });
-
-      isMusicPlaying = true;
-      if (musicBtn) {
-        musicBtn.classList.remove('is-muted');
-        musicBtn.setAttribute('aria-pressed', 'true');
-      }
-    } catch (e) {
-      console.log('Audio init deferred:', e);
-    }
-  }
-
-  function stopAmbientMelody() {
-    if (!isMusicPlaying || !synthGain) return;
-    synthGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.6);
-    setTimeout(() => {
-      isMusicPlaying = false;
-      if (musicBtn) {
-        musicBtn.classList.add('is-muted');
-        musicBtn.setAttribute('aria-pressed', 'false');
-      }
-    }, 600);
-  }
-
-  if (musicBtn) {
-    musicBtn.addEventListener('click', () => {
-      if (isMusicPlaying) {
-        stopAmbientMelody();
-      } else {
-        startAmbientMelody();
-      }
-    });
-  }
 
   /* ═══════════════════════════════════════════════════════════
      8. WISHES / RSVP FORM SUBMISSION
