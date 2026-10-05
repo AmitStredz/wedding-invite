@@ -16,32 +16,21 @@ document.addEventListener('DOMContentLoaded', () => {
   let isCoverOpened = false;
 
   /* ═══════════════════════════════════════════════════════════
-     1. GATEFOLD COVER & THEATRE CURTAIN OPENING
+     1. GATEFOLD COVER & THEATRE CURTAIN OPENING (Seamless Single Flow)
      ═══════════════════════════════════════════════════════════ */
   function openInvitation() {
     if (isCoverOpened) return;
     isCoverOpened = true;
 
-    // Trigger Flaps + Curtains Open
+    // Single unified flow: curtains part and invitation details reveal simultaneously in real time
     gatefoldCover.classList.add('is-open');
+    mainExperience.classList.add('is-revealed');
+    document.body.classList.remove('locked');
 
-    // Unlock body scroll after curtains start opening
-    setTimeout(() => {
-      document.body.classList.remove('locked');
-      mainExperience.classList.add('is-revealed');
-    }, 1000);
-
-    // Dismiss cover overlay completely after opening transition
+    // Dismiss the cover overlay after the synchronized curtain sweep completes
     setTimeout(() => {
       gatefoldCover.classList.add('is-dismissed');
-    }, 2800);
-
-    // Initial gentle scroll nudge to prompt exploration
-    setTimeout(() => {
-      if (window.scrollY < 80) {
-        window.scrollTo({ top: 120, behavior: 'smooth' });
-      }
-    }, 3200);
+    }, 2400);
   }
 
   if (sealBtn) {
@@ -433,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderAmbParticles() {
       aCtx.clearRect(0, 0, ambCanvas.width, ambCanvas.height);
-      aCtx.fillStyle = '#FFE6A3';
+      aCtx.fillStyle = '#C59B3C';
 
       particles.forEach(p => {
         p.y += p.vy;
