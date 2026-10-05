@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    ROYAL WEDDING INVITATION — JAVASCRIPT
-   Fathima Ibrahim & Amalakar Zulfikar
+   Fathima Ibrahim & Amalkar Zulfikar
    ═══════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Monogram & Botanical Flourish
     scratchCtx.fillStyle = '#4A3408';
     scratchCtx.font = isMobile ? '600 12px Cinzel, serif' : '600 14px Cinzel, serif';
-    scratchCtx.fillText('❦  Fathima  &  Amalakar  ❦', cx, cardY + (isMobile ? 142 : 166));
+    scratchCtx.fillText('❦  Fathima  &  Amalkar  ❦', cx, cardY + (isMobile ? 142 : 166));
 
     // Interactive Guidance Badge
     const pillW = isMobile ? 220 : 280;
