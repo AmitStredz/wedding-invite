@@ -364,8 +364,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const isMobile = vw < 768;
     
     // Starting distance and target meeting position (touching side by side without overlapping)
-    const startOffset = isMobile ? vw * 0.34 : vw * 0.25;
-    const targetOffset = isMobile ? 24 : 36;
+    const arenaEl = $('#ringsArena');
+    const arenaWidth = arenaEl ? arenaEl.clientWidth : (isMobile ? vw * 0.9 : 500);
+    const startOffset = isMobile ? arenaWidth * 0.38 : arenaWidth * 0.32;
+    const targetOffset = isMobile ? 22 : 32;
 
     // Bride Ring (starts left with 3D Y-tilt, moves to center)
     const brideCurrentX = -startOffset + ((startOffset - targetOffset) * easeP);
@@ -379,6 +381,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     brideRing.style.transform = `translate3d(${brideCurrentX}px, 0, 0) rotateY(${brideRotateY}deg) rotateZ(${brideRotateZ}deg) scale(${0.85 + easeP * 0.18})`;
     groomRing.style.transform = `translate3d(${groomCurrentX}px, 0, 0) rotateY(${groomRotateY}deg) rotateZ(${groomRotateZ}deg) scale(${0.85 + easeP * 0.18})`;
+
+    // Dynamic Golden Destiny Thread SVG Curve calculation
+    const goldenThreadPath = $('#goldenThreadPath');
+    const threadNodeLeft   = $('#threadNodeLeft');
+    const threadNodeRight  = $('#threadNodeRight');
+
+    if (goldenThreadPath && arenaEl) {
+      const svgW = 800;
+      const svgH = 200;
+      
+      const scaleRatio = svgW / arenaWidth;
+
+      // Calculate exact X centers for each ring inside the SVG viewBox coordinate system
+      const leftX  = (svgW / 2) + (brideCurrentX * scaleRatio);
+      const rightX = (svgW / 2) + (groomCurrentX * scaleRatio);
+      const cy     = svgH / 2;
+
+      // Quadratic curve sag flexes dynamically as rings get closer
+      const dipY = cy + (35 * (1 - easeP));
+
+      // As rings interlock (> 78%), straighten and collapse thread into golden spark
+      if (progress > 0.78) {
+        goldenThreadPath.setAttribute('d', `M ${leftX} ${cy} Q ${svgW/2} ${cy} ${rightX} ${cy}`);
+        goldenThreadPath.setAttribute('stroke-opacity', '0.2');
+      } else {
+        goldenThreadPath.setAttribute('d', `M ${leftX} ${cy} Q ${svgW/2} ${dipY} ${rightX} ${cy}`);
+        goldenThreadPath.setAttribute('stroke-opacity', `${1 - progress * 0.8}`);
+      }
+
+      if (threadNodeLeft) {
+        threadNodeLeft.setAttribute('cx', `${leftX}`);
+        threadNodeLeft.setAttribute('cy', `${cy}`);
+      }
+      if (threadNodeRight) {
+        threadNodeRight.setAttribute('cx', `${rightX}`);
+        threadNodeRight.setAttribute('cy', `${cy}`);
+      }
+    }
 
     // Rings meet in center (> 78% scroll progress)
     if (progress > 0.78) {

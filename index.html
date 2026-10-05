@@ -234,7 +234,7 @@
             <!-- Top Cameo Ribbon: Quran Verse & Romantic Cameo -->
             <div class="folio-cameo-header">
               <div class="cameo-portrait-circle">
-                <img src="couple-real.jpg" alt="Fathima &amp; Amalkar" class="cameo-couple-img" />
+                <img src="couple-real.png" alt="Fathima &amp; Amalkar" class="cameo-couple-img" />
               </div>
               <div class="cameo-text-wrap">
                 <div class="cameo-bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
@@ -313,7 +313,7 @@
       
       <!-- Ambient Animated Overlaid Photo Background -->
       <div class="memories-cinematic-bg" aria-hidden="true">
-        <div class="memory-bg-slide slide-1" style="background-image: url('couple-real.jpg')"></div>
+        <div class="memory-bg-slide slide-1" style="background-image: url('couple-real.png')"></div>
         <div class="memory-bg-slide slide-2" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1500&q=80')"></div>
         <div class="memory-bg-slide slide-3" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1500&q=80')"></div>
         <div class="memories-veil"></div>
@@ -454,43 +454,70 @@
       </div>
     </section>
 
-    <!-- ─── SECTION 4: THE TWO RINGS JOURNEY — OVERLAPPING ON SCROLL ─── -->
+    <!-- ─── SECTION 4: THE TWO RINGS JOURNEY — SIDE BY SIDE SPLIT LAYOUT ─── -->
     <section class="rings-union-section" id="ringsUnionSection">
       
       <div class="rings-sticky-viewport">
         
-        <div class="rings-heading-wrap">
-          <span class="rings-kicker">✦ An Eternal Promise ✦</span>
-          <h2 class="rings-title">Two Separate Paths, Becoming One</h2>
-          <!-- <p class="rings-subtext">Scroll down as the two wedding rings travel toward each other...</p> -->
-          <p class="union-caption">“May Allah bless you both, shower His blessings upon you, and unite you in goodness.”</p>
-        </div>
-
-        <!-- Dynamic 3D Rings Animation Arena -->
-        <div class="rings-arena" id="ringsArena">
+        <div class="rings-split-layout">
           
-          <!-- Ring A: Bride (Fathima - Rose Gold Twin Loop with Diamonds) -->
-          <div class="ring-entity ring-bride-real" id="brideRing">
-            <img src="ring-real.png" alt="Fathima's Wedding Ring" class="ring-real-img" />
+          <!-- LEFT SIDE: Prominent Portrait Image -->
+          <div class="rings-left-portrait-wrap">
+            <img src="couple-real.jpg" alt="Fathima &amp; Amalkar" class="rings-couple-portrait-img" />
           </div>
 
-          <!-- Ring B: Groom (Amalkar - Gold Band with Square Diamond) -->
-          <div class="ring-entity ring-groom-real" id="groomRing">
-            <img src="ring-male.png" alt="Amalkar's Wedding Ring" class="ring-real-img" />
+          <!-- RIGHT SIDE: Heading & Ring Interlocking Arena -->
+          <div class="rings-right-content-wrap">
+            
+            <div class="rings-heading-wrap">
+              <span class="rings-kicker">✦ An Eternal Promise ✦</span>
+              <!-- <h2 class="rings-title">Two Separate Paths, Becoming One</h2> -->
+              <p class="union-caption">“May Allah bless you both, shower His blessings upon you, and unite you in goodness.”</p>
+            </div>
+
+            <!-- Dynamic 3D Rings Animation Arena -->
+            <div class="rings-arena" id="ringsArena">
+              
+              <!-- Animated Golden Thread SVG path connecting the two rings -->
+              <svg class="ring-golden-thread-svg" id="ringThreadSvg" viewBox="0 0 800 200" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="goldThreadGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#C59B3C" stop-opacity="0.3" />
+                    <stop offset="25%" stop-color="#D4AF37" stop-opacity="0.95" />
+                    <stop offset="50%" stop-color="#FFF3CC" stop-opacity="1" />
+                    <stop offset="75%" stop-color="#D4AF37" stop-opacity="0.95" />
+                    <stop offset="100%" stop-color="#C59B3C" stop-opacity="0.3" />
+                  </linearGradient>
+                  <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+                <path id="goldenThreadPath" d="M 100 100 Q 250 150 400 100" fill="none" stroke="url(#goldThreadGrad)" stroke-width="3" filter="url(#goldGlow)" />
+                <circle id="threadNodeLeft" cx="100" cy="100" r="5" fill="#FFF3CC" />
+                <circle id="threadNodeRight" cx="400" cy="100" r="5" fill="#FFF3CC" />
+              </svg>
+
+              <!-- Ring A: Bride (Fathima - Rose Gold Twin Loop with Diamonds) -->
+              <div class="ring-entity ring-bride-real" id="brideRing">
+                <img src="ring-real.png" alt="Fathima's Wedding Ring" class="ring-real-img" />
+              </div>
+
+              <!-- Ring B: Groom (Amalkar - Gold Band with Square Diamond) -->
+              <div class="ring-entity ring-groom-real" id="groomRing">
+                <img src="ring-male.png" alt="Amalkar's Wedding Ring" class="ring-real-img" />
+              </div>
+
+              <!-- The Interlock Golden Light Flash -->
+              <div class="ring-interlock-sparkle" id="ringSparkle">
+                <div class="sunburst-rays"></div>
+                <div class="sparkle-core">✦</div>
+              </div>
+
+            </div>
+
           </div>
 
-          <!-- The Interlock Golden Light Flash -->
-          <div class="ring-interlock-sparkle" id="ringSparkle">
-            <div class="sunburst-rays"></div>
-            <div class="sparkle-core">✦</div>
-          </div>
-
-        </div>
-
-        <div class="rings-union-status" id="unionStatus">
-          <div class="union-heart">❤</div>
-          <!-- <h3 class="union-proclamation">Two Rings · One Eternal Bond</h3>
-          <p class="union-caption">“May Allah bless you both, shower His blessings upon you, and unite you in goodness.”</p> -->
         </div>
 
       </div>
