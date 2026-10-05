@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-  <meta name="theme-color" content="#233a2d" />
+  <meta name="theme-color" content="#122219" />
   <meta name="description" content="Wedding Invitation — Fathima Ibrahim & Amalakar Zulfikar" />
   <title>Fathima & Amalakar — Royal Wedding Invitation</title>
 
   <!-- Google Fonts: Royal display serif, romantic calligraphy, elegant sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -28,7 +28,7 @@
   </button>
 
   <!-- ═══════════════════════════════════════════════════════════
-       1. ROYAL FRONT COVER (Inspired by Sage Embossed Reference)
+       1. ROYAL FRONT COVER (Sage Embossed Envelope & Curtains)
        ═══════════════════════════════════════════════════════════ -->
   <section class="gatefold-cover" id="gatefoldCover" aria-label="Wedding Invitation Envelope">
     
@@ -64,12 +64,10 @@
               <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0b1710" flood-opacity="0.6"/>
             </filter>
           </defs>
-          <!-- Ornate frame shape -->
           <path d="M100 12 C125 12, 145 2, 160 22 C178 44, 168 65, 185 85 C198 102, 198 138, 185 155 C168 175, 178 196, 160 218 C145 238, 125 228, 100 228 C75 228, 55 238, 40 218 C22 196, 32 175, 15 155 C2 138, 2 102, 15 85 C32 65, 22 44, 40 22 C55 2, 75 12, 100 12 Z" 
                 fill="#FFFBF2" stroke="url(#goldPlate)" stroke-width="5" filter="url(#sealShadow)"/>
           <path d="M100 20 C120 20, 138 12, 150 28 C164 47, 156 65, 170 82 C181 96, 181 124, 170 138 C156 155, 164 173, 150 192 C138 208, 120 200, 100 200 C80 200, 62 208, 50 192 C36 173, 44 155, 30 138 C19 124, 19 96, 30 82 C44 65, 36 47, 50 28 C62 12, 80 20, 100 20 Z" 
                 fill="none" stroke="url(#goldPlate)" stroke-width="1.5" stroke-dasharray="3,3"/>
-          <!-- Pearls at peaks -->
           <circle cx="100" cy="14" r="3.5" fill="#FFF8E0" stroke="#B8860B" stroke-width="1"/>
           <circle cx="100" cy="226" r="3.5" fill="#FFF8E0" stroke="#B8860B" stroke-width="1"/>
           <circle cx="14" cy="120" r="3.5" fill="#FFF8E0" stroke="#B8860B" stroke-width="1"/>
@@ -86,7 +84,7 @@
       <div class="tap-glow-pulse" aria-hidden="true"></div>
     </div>
 
-    <!-- Soft curtain layer behind the gatefold that draws open with silk folds -->
+    <!-- Silk theatre curtains -->
     <div class="theatre-curtains" aria-hidden="true">
       <div class="theatre-curtain theatre-curtain--left"></div>
       <div class="theatre-curtain theatre-curtain--right"></div>
@@ -95,15 +93,15 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
-       MAIN EXPERIENCE (Revealed after opening)
+       MAIN EXPERIENCE (Organic, Fluid & Dissolving Design)
        ═══════════════════════════════════════════════════════════ -->
   <main id="mainExperience" class="main-experience">
 
-    <!-- ─── SECTION 1: ROYAL EDITORIAL INVITATION (Inspired by Reference Images 1 & 4) ─── -->
-    <section class="editorial-invite-section" id="invitationHero">
+    <!-- ─── SECTION 1: SEAMLESS DISSOLVING MAIN INVITATION (No Box Borders!) ─── -->
+    <section class="fluid-invite-section" id="invitationHero">
       
-      <!-- Top Royal Drapery Valance (Reference Image 4 Style) -->
-      <div class="royal-valance-frame" aria-hidden="true">
+      <!-- Top Royal Drapery Swag (Fluid Feathered Overlay) -->
+      <div class="fluid-valance-overlay" aria-hidden="true">
         <svg class="valance-svg" viewBox="0 0 1440 220" preserveAspectRatio="none">
           <defs>
             <linearGradient id="drapeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -112,111 +110,98 @@
               <stop offset="80%" stop-color="#B88D3B"/>
               <stop offset="100%" stop-color="#7A5618"/>
             </linearGradient>
-            <filter id="drapeGlow">
-              <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/>
-            </filter>
           </defs>
-          <!-- Elegant scalloped swag drapes -->
-          <path d="M0,0 L1440,0 L1440,70 Q1200,160 960,85 Q720,175 480,85 Q240,165 0,70 Z" fill="url(#drapeGrad)" filter="url(#drapeGlow)"/>
-          <path d="M0,0 L1440,0 L1440,40 Q1080,120 720,50 Q360,120 0,40 Z" fill="#FDF3DC" opacity="0.4"/>
-          <!-- Pearl festoons -->
-          <path d="M60,65 Q240,140 420,75 M420,75 Q600,150 780,75 M780,75 Q960,150 1140,75 M1140,75 Q1290,140 1380,65" fill="none" stroke="#FFEBB7" stroke-width="2.5" stroke-dasharray="1,8" stroke-linecap="round"/>
+          <path d="M0,0 L1440,0 L1440,70 Q1200,160 960,85 Q720,175 480,85 Q240,165 0,70 Z" fill="url(#drapeGrad)"/>
+          <path d="M0,0 L1440,0 L1440,40 Q1080,120 720,50 Q360,120 0,40 Z" fill="#FDF3DC" opacity="0.35"/>
+          <path d="M60,65 Q240,140 420,75 M420,75 Q600,150 780,75 M780,75 Q960,150 1140,75 M1140,75 Q1290,140 1380,65" fill="none" stroke="#FFEBB7" stroke-width="2" stroke-dasharray="1,8"/>
         </svg>
       </div>
 
-      <!-- Main Editorial Layout: Couple Cropped Image + Warm Story Details -->
-      <div class="editorial-magazine-card">
+      <!-- Organic Dissolving Layout (No Cards, No Hard Box Borders) -->
+      <div class="fluid-invite-canvas">
         
-        <!-- Left / Side Visual: Atmospheric Couple Portrait in Festive Warmth -->
-        <div class="editorial-visual-pane">
-          <div class="editorial-image-mask">
+        <!-- Left Side Visual: Atmospheric Soft-Blended Couple Artwork -->
+        <div class="fluid-visual-wrapper">
+          <div class="feathered-image-mask">
             <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=85" 
                  alt="Fathima and Amalakar couple portrait" 
-                 class="couple-main-img" />
-            <div class="image-warm-overlay"></div>
-            <!-- Jasmine Garland / Floral Badge Overlay -->
-            <div class="photo-caption-tag">
-              <span class="caption-arabic">بِسْمِ ٱللَّهِ</span>
-              <span class="caption-label">Same lanes · Different stories</span>
-            </div>
+                 class="fluid-couple-img" />
+            <div class="vignette-feather-overlay"></div>
           </div>
-          <!-- Floral urn decor at bottom of photo (like reference 4) -->
-          <div class="editorial-photo-footer">
-            <span>❦ Bound by Destiny ❦</span>
+          <div class="floating-caption-chip">
+            <span class="chip-arabic">بِسْمِ ٱللَّهِ</span>
+            <span class="chip-txt">Same lanes · Different stories</span>
           </div>
         </div>
 
-        <!-- Right / Paper Pane: High-End Royal Wedding Details -->
-        <div class="editorial-text-pane">
+        <!-- Right Side: Dissolving Typography Canvas -->
+        <div class="fluid-text-wrapper">
           
-          <div class="bismillah-header">
+          <div class="bismillah-block">
             <div class="arabic-calligraphy">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
             <p class="bismillah-en">In the name of Allah, The Most Gracious, The Most Merciful</p>
           </div>
 
-          <div class="royal-ornament-rule">
+          <div class="gold-flourish-rule">
             <span class="line"></span>
-            <span class="gem">✦ ❈ ✦</span>
+            <span class="symbol">✦ ❈ ✦</span>
             <span class="line"></span>
           </div>
 
-          <div class="parental-invite">
-            <p class="invite-preamble">With the blessings of Allah and the cherished love of our families</p>
-            <h4 class="parents-names">Mr. Ibrahim Kutty M &amp; Mrs. Sheeja M P</h4>
-            <p class="cordially-text">cordially request the honour of your graceful presence &amp; prayers to celebrate the wedding ceremony of their beloved daughter</p>
+          <div class="parental-blessing-text">
+            <p class="preamble">With the blessings of Allah and the cherished love of our families</p>
+            <h3 class="parents-names">Mr. Ibrahim Kutty M &amp; Mrs. Sheeja M P</h3>
+            <p class="invitation-request">cordially invite you and your family to the auspicious wedding ceremony of their beloved daughter</p>
           </div>
 
           <!-- Couple's Grand Display Names -->
-          <div class="royal-couple-names">
-            <div class="name-block bride-block">
-              <span class="role-tag">The Bride</span>
-              <h1 class="person-name">Fathima Ibrahim</h1>
-              <p class="lineage-text">Granddaughter of Late M. Mytheen Kunju (Kulacha) &amp; Hajira Beevi<br>&amp; Late Mytheen Kunju &amp; Fathima Kunju</p>
+          <div class="couple-names-flow">
+            <div class="person-card">
+              <span class="person-role">The Bride</span>
+              <h1 class="person-display-name">Fathima Ibrahim</h1>
+              <p class="person-lineage">Granddaughter of Late M. Mytheen Kunju (Kulacha) &amp; Hajira Beevi<br>&amp; Late Mytheen Kunju &amp; Fathima Kunju</p>
             </div>
 
-            <div class="couple-heart-knot">
-              <svg viewBox="0 0 60 60" class="knot-svg" width="44" height="44">
-                <path d="M30,12 C24,2 8,6 10,24 C12,38 30,50 30,50 C30,50 48,38 50,24 C52,6 36,2 30,12 Z" fill="#982229"/>
-                <path d="M30,16 C25,7 13,10 14,23 C16,33 30,43 30,43 C30,43 44,33 46,23 C47,10 35,7 30,16 Z" fill="none" stroke="#F5D076" stroke-width="1.5"/>
-              </svg>
-              <span class="wedding-hashtag">#FathimaWedsAmalakar</span>
+            <div class="heart-knot-divider">
+              <span class="knot-icon">❦</span>
+              <span class="hashtag">#FathimaWedsAmalakar</span>
             </div>
 
-            <div class="name-block groom-block">
-              <span class="role-tag">The Groom</span>
-              <h1 class="person-name">Amalakar Zulfikar</h1>
-              <p class="lineage-text">Son of Mr. Zulfikar &amp; Mrs. Saheera Beegum<br>New House, Mullathil Wari, Thiruvampady P.O., Alappuzha</p>
+            <div class="person-card">
+              <span class="person-role">The Groom</span>
+              <h1 class="person-display-name">Amalakar Zulfikar</h1>
+              <p class="person-lineage">Son of Mr. Zulfikar &amp; Mrs. Saheera Beegum<br>New House, Mullathil Wari, Thiruvampady P.O., Alappuzha</p>
             </div>
           </div>
 
-          <!-- Ceremony & Events Highlight Bar -->
-          <div class="events-summary-grid">
+          <!-- Floating Ceremonies & Event Capsules -->
+          <div class="fluid-events-container">
             
-            <div class="event-capsule">
-              <div class="capsule-ribbon">Reception</div>
-              <div class="capsule-date">Saturday, 28 Nov 2026</div>
-              <div class="capsule-time">5:00 PM Onwards</div>
-              <div class="capsule-loc">Sneha Auditorium, Thevalakara</div>
+            <div class="fluid-event-capsule">
+              <span class="capsule-tag">Reception</span>
+              <strong class="capsule-date-str">Saturday, 28 Nov 2026</strong>
+              <span class="capsule-time-str">5:00 PM Onwards</span>
+              <span class="capsule-venue-str">Sneha Auditorium, Thevalakara</span>
             </div>
 
-            <div class="event-capsule event-capsule--gold">
-              <div class="capsule-ribbon">Nikah Ceremony</div>
-              <div class="capsule-date">Sunday, 29 Nov 2026</div>
-              <div class="capsule-time">12:00 Noon &amp; 12:30 PM</div>
-              <div class="capsule-hijri">19th Jum. al-Akhir 1448</div>
-              <div class="capsule-loc">Sneha Auditorium, Kadappayil Jn.</div>
+            <div class="fluid-event-capsule fluid-event-capsule--nikah">
+              <span class="capsule-tag">Nikah Ceremony</span>
+              <strong class="capsule-date-str">Sunday, 29 Nov 2026</strong>
+              <span class="capsule-time-str">12:00 Noon &amp; 12:30 PM</span>
+              <span class="capsule-hijri-str">19th Jum. al-Akhir 1448</span>
+              <span class="capsule-venue-str">Sneha Auditorium, Kadappayil Jn.</span>
             </div>
 
           </div>
 
-          <!-- Venue & Directions CTA -->
-          <div class="venue-action-bar">
-            <div class="venue-text">
-              <strong>Venue: Sneha Auditorium</strong>
+          <!-- Venue CTA -->
+          <div class="venue-location-bar">
+            <div class="loc-details">
+              <strong>Sneha Auditorium</strong>
               <span>Kadappayil Jn., Thevalakara, Kollam</span>
             </div>
-            <a href="https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara" target="_blank" rel="noopener" class="btn-directions">
-              <span>View On Google Maps</span>
+            <a href="https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara" target="_blank" rel="noopener" class="btn-maps-pill">
+              <span>View Location Map</span>
               <i>↗</i>
             </a>
           </div>
@@ -225,46 +210,65 @@
 
       </div>
 
-      <!-- Floating decorative marigold / floral garland bottom -->
-      <div class="scenic-bottom-garden" aria-hidden="true"></div>
     </section>
 
-    <!-- ─── SECTION 2: LUXURIOUS GOLD SCRATCH CARD (Date Reveal) ─── -->
-    <section class="scratch-card-experience" id="scratchSection">
+    <!-- ─── SECTION 2: BESPOKE ARTISTIC DATE REVEAL (couple-real.jpg) ─── -->
+    <section class="creative-date-reveal-section" id="scratchSection">
       
-      <div class="section-badge-tag">✦ Interactive Reveal ✦</div>
-      <h2 class="scratch-headline">Scratch To Reveal The Big Day</h2>
-      <p class="scratch-description">Rub your finger or cursor over the shimmering gold royal seal to uncover the sacred date.</p>
+      <div class="section-tag-pill">✦ Interactive Reveal ✦</div>
+      <h2 class="reveal-section-title">Scratch To Uncover Their Big Day</h2>
+      <p class="reveal-section-subtitle">Rub over the shimmering gold seal to reveal the couple &amp; their sacred Nikah date.</p>
 
-      <div class="scratch-stage-box">
+      <div class="scratch-artistic-stage">
         
-        <div class="scratch-frame-holder" id="scratchHolder">
+        <!-- The Luxury Archival Keepsake Card -->
+        <div class="artistic-scratch-container" id="scratchHolder">
           
-          <!-- Secret content underneath -->
-          <div class="scratch-hidden-content" id="scratchContent">
-            <div class="hidden-heart-icon">♥</div>
-            <span class="revealed-subtitle">MARK YOUR CALENDAR</span>
-            <div class="revealed-main-date">
-              <span class="day-num">29</span>
-              <div class="month-year-col">
-                <span class="month-txt">NOVEMBER</span>
-                <span class="year-txt">2026</span>
+          <!-- Hidden Content Beneath: Portrait on Top, Ceremony Plaque Below -->
+          <div class="bespoke-couple-keepsake" id="scratchContent">
+            
+            <!-- Top Portion: Portrait Window - Clear, Unobstructed Faces! -->
+            <div class="keepsake-portrait-window">
+              <div class="portrait-crop-wrapper">
+                <img src="couple-real.jpg" alt="Fathima and Amalakar smiling in heart sunglasses" class="keepsake-couple-img" />
+                <div class="portrait-sun-glow"></div>
+              </div>
+              <div class="portrait-ornate-rim"></div>
+              <!-- Floating Heart Sparkles around their sunglasses -->
+              <div class="sunglasses-heart-sparkle left-sparkle">♥</div>
+              <div class="sunglasses-heart-sparkle right-sparkle">♥</div>
+            </div>
+
+            <!-- Bottom Portion: Royal Ceremony Plaque - Located cleanly beneath the portrait -->
+            <div class="keepsake-date-plaque">
+              <div class="plaque-inner-rule">
+                <span class="plaque-kicker">✦ THE NIKAH CEREMONY ✦</span>
+                <div class="plaque-date-row">
+                  <span class="plaque-day-number">29</span>
+                  <div class="plaque-month-year">
+                    <span class="plaque-month">NOVEMBER</span>
+                    <span class="plaque-year">2026</span>
+                  </div>
+                </div>
+                <div class="plaque-timing-badge">SUNDAY · 12:00 NOON &amp; 12:30 PM</div>
+                <div class="plaque-venue-line">
+                  <span class="venue-pin">📍</span> Sneha Auditorium, Thevalakara
+                </div>
+                <p class="plaque-quran-verse">“And We created you in pairs” · Quran 78:8</p>
               </div>
             </div>
-            <div class="revealed-day-badge">SUNDAY · NIKAH DAY</div>
-            <div class="revealed-venue">Sneha Auditorium · 12:00 Noon</div>
-            <div class="revealed-dua">“And We created you in pairs” (Surah An-Naba 78:8)</div>
+
           </div>
 
-          <!-- HTML5 Canvas scratch layer -->
-          <canvas id="luxuryScratchCanvas" class="scratch-canvas-el" width="340" height="420"></canvas>
+          <!-- HTML5 Canvas Gold Scratch Foil Overlay -->
+          <canvas id="luxuryScratchCanvas" class="scratch-canvas-el" width="370" height="560"></canvas>
         </div>
 
-        <!-- Scratch Status / Progress -->
-        <div class="scratch-feedback" id="scratchFeedback">
-          <span class="feedback-sparkle">✦</span>
-          <span id="scratchPercentText">Rub with your finger to scratch</span>
-          <button class="btn-reveal-all" id="instantRevealBtn" type="button">Quick Reveal ✧</button>
+        <!-- Scratch Feedback & Quick Button -->
+        <div class="scratch-status-bar">
+          <span class="sparkle-icon">✦</span>
+          <span id="scratchPercentText" class="status-txt">Rub with finger or mouse to scratch</span>
+          <button class="btn-quick-reveal" id="instantRevealBtn" type="button">Quick Reveal ✧</button>
         </div>
 
       </div>
@@ -273,17 +277,17 @@
     <!-- ─── SECTION 3: MEMORIES & ANIMATED FLOATING OVERLAY PHOTOS ─── -->
     <section class="memories-section" id="memoriesSection">
       
-      <!-- Ambient Animated Overlaid Photo Background (Ken Burns drifting softly) -->
+      <!-- Ambient Animated Overlaid Photo Background -->
       <div class="memories-cinematic-bg" aria-hidden="true">
-        <div class="memory-bg-slide slide-1" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1500&q=80')"></div>
-        <div class="memory-bg-slide slide-2" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1500&q=80')"></div>
-        <div class="memory-bg-slide slide-3" style="background-image: url('https://images.unsplash.com/photo-1529634597503-139d3726fad5?auto=format&fit=crop&w=1500&q=80')"></div>
+        <div class="memory-bg-slide slide-1" style="background-image: url('couple-real.jpg')"></div>
+        <div class="memory-bg-slide slide-2" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1500&q=80')"></div>
+        <div class="memory-bg-slide slide-3" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1500&q=80')"></div>
         <div class="memories-veil"></div>
       </div>
 
       <div class="memories-content-container">
         
-        <div class="section-badge-tag section-badge-tag--light">✦ Our Story ✦</div>
+        <div class="section-tag-pill section-tag-pill--light">✦ Our Story ✦</div>
         <h2 class="memories-title">Moments That Led To Forever</h2>
         
         <p class="memories-quote">
@@ -292,12 +296,12 @@
           praying for each other, and dreaming in the same direction.”
         </p>
 
-        <!-- Floating Polaroid / Editorial Cards that hover & tilt -->
+        <!-- Floating Polaroid / Editorial Cards -->
         <div class="memories-cards-gallery">
           
           <figure class="memory-card tilt-left">
             <div class="card-inner">
-              <img src="https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?auto=format&fit=crop&w=800&q=80" alt="Joyful laughter moment" loading="lazy" />
+              <img src="couple-real.jpg" alt="Fathima & Amalakar memory" loading="lazy" />
               <figcaption>
                 <span class="card-date">Chapter 01</span>
                 <strong>The First Conversations</strong>
@@ -338,7 +342,6 @@
       
       <div class="rings-sticky-viewport">
         
-        <!-- Header Guidance -->
         <div class="rings-heading-wrap">
           <span class="rings-kicker">✦ An Eternal Promise ✦</span>
           <h2 class="rings-title">Two Separate Paths, Becoming One</h2>
@@ -348,7 +351,6 @@
         <!-- Dynamic 3D Rings Animation Arena -->
         <div class="rings-arena" id="ringsArena">
           
-          <!-- Background hands holding image that fades in when rings meet -->
           <div class="rings-photo-backdrop" id="ringsPhotoBackdrop">
             <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57?auto=format&fit=crop&w=1400&q=80" 
                  alt="Couple hands together with wedding rings" 
@@ -356,7 +358,7 @@
             <div class="photo-warm-glow"></div>
           </div>
 
-          <!-- Ring A: Bride (Fathima) - Elegant Solitaire Ring with Diamond Flare -->
+          <!-- Ring A: Bride (Fathima) -->
           <div class="ring-entity ring-bride" id="brideRing">
             <svg viewBox="0 0 160 160" class="ring-svg">
               <defs>
@@ -374,11 +376,8 @@
                   </feMerge>
                 </filter>
               </defs>
-              <!-- Outer Ring -->
               <ellipse cx="80" cy="80" rx="55" ry="52" fill="none" stroke="url(#ringGoldL)" stroke-width="12" filter="url(#goldGlowL)"/>
-              <!-- Inner Rim Specular Highlight -->
               <ellipse cx="80" cy="80" rx="48" ry="45" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/>
-              <!-- Solitaire Diamond on top -->
               <polygon points="80,18 90,28 80,38 70,28" fill="#FFFFFF" stroke="#D4AF37" stroke-width="1.5"/>
               <circle cx="80" cy="28" r="6" fill="#FFFFFF" opacity="0.9"/>
               <path d="M72,28 L88,28 M80,20 L80,36" stroke="#C5A059" stroke-width="1"/>
@@ -386,7 +385,7 @@
             <span class="ring-owner-tag">Fathima</span>
           </div>
 
-          <!-- Ring B: Groom (Amalakar) - Bold Royal Gold Band -->
+          <!-- Ring B: Groom (Amalakar) -->
           <div class="ring-entity ring-groom" id="groomRing">
             <svg viewBox="0 0 160 160" class="ring-svg">
               <defs>
@@ -404,9 +403,7 @@
                   </feMerge>
                 </filter>
               </defs>
-              <!-- Groom Gold Band -->
               <ellipse cx="80" cy="80" rx="58" ry="55" fill="none" stroke="url(#ringGoldR)" stroke-width="16" filter="url(#goldGlowR)"/>
-              <!-- Engraved decorative line in band -->
               <ellipse cx="80" cy="80" rx="58" ry="55" fill="none" stroke="#FFDF85" stroke-width="2.5" stroke-dasharray="6,4"/>
             </svg>
             <span class="ring-owner-tag">Amalakar</span>
@@ -420,7 +417,6 @@
 
         </div>
 
-        <!-- Union Outcome Label when scrolled fully together -->
         <div class="rings-union-status" id="unionStatus">
           <div class="union-heart">❤</div>
           <h3 class="union-proclamation">Two Rings · One Eternal Bond</h3>
@@ -434,7 +430,6 @@
     <!-- ─── SECTION 5: COUNTDOWN & WARM BLESSINGS ─── -->
     <section class="grand-closing-section">
       
-      <!-- Countdown Unit -->
       <div class="countdown-grand-card">
         <span class="countdown-eyebrow">COUNTING EVERY HEARTBEAT</span>
         <h3 class="countdown-headline">Until The Celebrations Begin</h3>
@@ -481,7 +476,6 @@
         </div>
       </div>
 
-      <!-- Footer Stamp -->
       <footer class="invitation-footer">
         <div class="footer-names">Fathima &amp; Amalakar</div>
         <div class="footer-tagline">With immense love and gratitude from both families</div>
