@@ -952,6 +952,12 @@ a {
   position: relative;
   width: min(94vw, 940px);
   margin: 0 auto;
+  transition: max-width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* In Compact Scratch Mode (Before Full Unveil) */
+.folio-ornate-wrapper.is-compact-scratch {
+  max-width: min(92vw, 680px);
 }
 
 /* Arabesque Corner Brackets */
@@ -962,6 +968,7 @@ a {
   pointer-events: none;
   z-index: 6;
   opacity: 0.9;
+  transition: all 0.5s ease;
 }
 
 .folio-corner::before {
@@ -1032,6 +1039,19 @@ a {
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
+  transition: max-height 0.9s cubic-bezier(0.16, 1, 0.3, 1), height 0.9s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+/* Compact scratch height before unveiling (Effortless, bite-sized & focused) */
+.gilded-folio-container.is-compact-scratch {
+  height: clamp(280px, 40vh, 330px);
+  max-height: 330px;
+}
+
+/* Smooth full expansion on reveal */
+.gilded-folio-container.is-unveiled {
+  height: auto;
+  max-height: 2800px;
 }
 
 /* ─── Reveal Celebration: Light Sweep & Glow Pulse ─── */

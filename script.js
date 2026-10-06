@@ -179,8 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cy = h / 2;
     const isMobile = w < 640;
 
-    const cardW = Math.min(w - 60, isMobile ? 320 : 540);
-    const cardH = Math.min(h - 70, isMobile ? 230 : 250);
+    const cardW = Math.min(w - 28, isMobile ? 310 : 500);
+    const cardH = Math.min(h - 28, isMobile ? 220 : 240);
     const cardX = cx - cardW / 2;
     const cardY = cy - cardH / 2;
 
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Plaque Parchment & Gold Plate Background
-    scratchCtx.fillStyle = 'rgba(255, 252, 242, 0.38)';
+    scratchCtx.fillStyle = 'rgba(255, 252, 242, 0.42)';
     drawRoundedBox(scratchCtx, cardX, cardY, cardW, cardH, 18);
     scratchCtx.fill();
 
@@ -210,37 +210,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Plaque Ornate Typography
     // Arabic Bismillah
     scratchCtx.fillStyle = '#4A3408';
-    scratchCtx.font = isMobile ? '600 13px "Cormorant Garamond", serif' : '600 16px "Cormorant Garamond", serif';
-    scratchCtx.fillText('بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', cx, cardY + (isMobile ? 26 : 32));
+    scratchCtx.font = isMobile ? '600 12.5px "Cormorant Garamond", serif' : '600 15px "Cormorant Garamond", serif';
+    scratchCtx.fillText('بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', cx, cardY + (isMobile ? 24 : 28));
 
     // Royal Kicker
     scratchCtx.fillStyle = '#FFFFFF';
-    scratchCtx.font = isMobile ? '700 9px Cinzel, serif' : '700 11px Cinzel, serif';
-    scratchCtx.fillText('✦ THE SACRED WEDDING CEREMONIES ✦', cx, cardY + (isMobile ? 52 : 62));
+    scratchCtx.font = isMobile ? '700 8.5px Cinzel, serif' : '700 10.5px Cinzel, serif';
+    scratchCtx.fillText('✦ THE SACRED WEDDING CEREMONIES ✦', cx, cardY + (isMobile ? 48 : 56));
 
     // Flowing Romantic Script Callout
     scratchCtx.fillStyle = '#261B06';
-    scratchCtx.font = isMobile ? '400 32px "Alex Brush", cursive' : '400 42px "Alex Brush", cursive';
-    scratchCtx.fillText('Unveil the Auspicious Dates', cx, cardY + (isMobile ? 100 : 120));
+    scratchCtx.font = isMobile ? '400 30px "Alex Brush", cursive' : '400 38px "Alex Brush", cursive';
+    scratchCtx.fillText('Unveil the Auspicious Dates', cx, cardY + (isMobile ? 90 : 105));
 
     // Monogram & Botanical Flourish
     scratchCtx.fillStyle = '#4A3408';
-    scratchCtx.font = isMobile ? '600 12px Cinzel, serif' : '600 14px Cinzel, serif';
-    scratchCtx.fillText('❦  Fathima  &  Amalkar  ❦', cx, cardY + (isMobile ? 142 : 166));
+    scratchCtx.font = isMobile ? '600 11.5px Cinzel, serif' : '600 13px Cinzel, serif';
+    scratchCtx.fillText('❦  Fathima  &  Amalkar  ❦', cx, cardY + (isMobile ? 128 : 148));
 
     // Interactive Guidance Badge
-    const pillW = isMobile ? 220 : 280;
-    const pillH = isMobile ? 28 : 32;
-    const pillY = cardY + (isMobile ? 184 : 208);
-    scratchCtx.fillStyle = 'rgba(37, 57, 43, 0.8)';
-    drawRoundedBox(scratchCtx, cx - pillW / 2, pillY - pillH / 2, pillW, pillH, 16);
+    const pillW = isMobile ? 210 : 270;
+    const pillH = isMobile ? 26 : 30;
+    const pillY = cardY + (isMobile ? 168 : 194);
+    scratchCtx.fillStyle = 'rgba(37, 57, 43, 0.82)';
+    drawRoundedBox(scratchCtx, cx - pillW / 2, pillY - pillH / 2, pillW, pillH, 15);
     scratchCtx.fill();
     scratchCtx.strokeStyle = '#E5C77A';
     scratchCtx.lineWidth = 1;
     scratchCtx.stroke();
 
     scratchCtx.fillStyle = '#FFF8E7';
-    scratchCtx.font = isMobile ? '700 9px Montserrat, sans-serif' : '700 10px Montserrat, sans-serif';
+    scratchCtx.font = isMobile ? '700 8.5px Montserrat, sans-serif' : '700 9.5px Montserrat, sans-serif';
     scratchCtx.fillText('✦ GENTLY BRUSH OR SWIPE TO REVEAL ✦', cx, pillY);
 
     // 6. Switch Canvas Composite Operation to Erase Mode for Interactivity
@@ -307,8 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
       percentText.textContent = `${percent}% Unveiled`;
     }
 
-    // Auto complete reveal when > 32%
-    if (ratio > 0.32) {
+    // Auto complete reveal when > 28%
+    if (ratio > 0.28) {
       revealFullDate();
     }
   }
@@ -317,19 +317,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hasRevealed) return;
     hasRevealed = true;
 
+    const ornateWrapper = $('.folio-ornate-wrapper');
+    const scratchHolder = $('#scratchHolder');
+
+    // Remove compact scratch mode to smoothly expand to full section
+    if (ornateWrapper) {
+      ornateWrapper.classList.remove('is-compact-scratch');
+    }
+    if (scratchHolder) {
+      scratchHolder.classList.remove('is-compact-scratch');
+      scratchHolder.classList.add('is-unveiled');
+    }
+
     if (scratchCanvas) {
-      scratchCanvas.style.transition = 'opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease';
+      scratchCanvas.style.transition = 'opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease';
       scratchCanvas.style.opacity = '0';
       scratchCanvas.style.transform = 'scale(1.02)';
       scratchCanvas.style.filter = 'blur(4px)';
       scratchCanvas.style.pointerEvents = 'none';
       setTimeout(() => {
         scratchCanvas.style.display = 'none';
-      }, 800);
+      }, 700);
     }
 
     if (percentText) {
       percentText.textContent = '✦ Sacred Dates & Ceremonies Revealed! ✦';
+    }
+
+    if (instantBtn) {
+      instantBtn.style.display = 'none';
     }
 
     // Burst golden hearts and confetti
