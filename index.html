@@ -280,15 +280,15 @@
             <!-- Two-Wing Ceremony Program Cards -->
             <div class="folio-ceremonies-wings">
               
-              <!-- Left Wing: Reception -->
-              <div class="ceremony-wing-card ceremony-wing-card--reception" id="receptionWingCard">
-                <div class="wing-icon-badge" id="receptionIconBadge">✨</div>
-                <span class="wing-badge" id="receptionBadge">THE RECEPTION</span>
-                <h3 class="wing-date" id="receptionDate">Saturday, 28 Nov 2026</h3>
-                <div class="wing-time" id="receptionTime">5:00 PM Onwards</div>
-                <div class="wing-hijri" id="receptionHijri" style="display: none;"></div>
-                <div class="wing-loc" id="receptionLoc">Sneha Auditorium, Thevalakara</div>
-                <p class="wing-note" id="receptionNote">An evening of joyful blessings, family togetherness, and grand dinner.</p>
+              <!-- Left Wing (Event 1 in Date Order) -->
+              <div class="ceremony-wing-card ceremony-wing-card--reception" id="wingCardLeft">
+                <div class="wing-icon-badge" id="wingIconLeft">✨</div>
+                <span class="wing-badge" id="wingBadgeLeft">THE RECEPTION</span>
+                <h3 class="wing-date" id="wingDateLeft">Saturday, 28 Nov 2026</h3>
+                <div class="wing-time" id="wingTimeLeft">5:00 PM Onwards</div>
+                <div class="wing-hijri" id="wingHijriLeft" style="display: none;"></div>
+                <div class="wing-loc" id="wingLocLeft">Sneha Auditorium, Thevalakara</div>
+                <p class="wing-note" id="wingNoteLeft">An evening of joyful blessings, family togetherness, and grand dinner.</p>
               </div>
 
               <!-- Center Floral Crest Divider -->
@@ -298,32 +298,34 @@
                 <span class="divider-line"></span>
               </div>
 
-              <!-- Right Wing: Nikah Ceremony -->
-              <div class="ceremony-wing-card ceremony-wing-card--nikah">
-                <div class="wing-icon-badge">💍</div>
-                <span class="wing-badge">THE SACRED NIKAH</span>
-                <h3 class="wing-date">Sunday, 29 Nov 2026</h3>
-                <div class="wing-time">12:00 Noon &amp; 12:30 PM</div>
-                <div class="wing-hijri">19th Jum. al-Akhir 1448</div>
-                <div class="wing-loc">Sneha Auditorium, Kadappayil Jn.</div>
-                <p class="wing-note">The sacred Nikah solemnisation followed by traditional festive lunch.</p>
+              <!-- Right Wing (Event 2 in Date Order) -->
+              <div class="ceremony-wing-card ceremony-wing-card--nikah" id="wingCardRight">
+                <div class="wing-icon-badge" id="wingIconRight">💍</div>
+                <span class="wing-badge" id="wingBadgeRight">THE SACRED NIKAH</span>
+                <h3 class="wing-date" id="wingDateRight">Sunday, 29 Nov 2026</h3>
+                <div class="wing-time" id="wingTimeRight">12:00 Noon &amp; 12:30 PM</div>
+                <div class="wing-hijri" id="wingHijriRight">19th Jum. al-Akhir 1448</div>
+                <div class="wing-loc" id="wingLocRight">Sneha Auditorium, Kadappayil Jn.</div>
+                <p class="wing-note" id="wingNoteRight">The sacred Nikah solemnisation followed by traditional festive lunch.</p>
               </div>
 
             </div>
 
-            <!-- Bottom Full-Width Venue Bar -->
-            <div class="folio-venue-footer">
-              <div class="venue-info-inline">
-                <span class="venue-pin-icon">🏛</span>
-                <div class="venue-inline-text">
-                  <strong id="folioVenueTitle">Sneha Auditorium</strong>
-                  <span id="folioVenueAddress">Kadappayil Jn., Thevalakara, Kollam, Kerala</span>
+            <!-- Bottom Full-Width Venue Bar (Dynamic Venue Cards for Single/Dual Auditoriums) -->
+            <div class="folio-venue-footer" id="folioVenueFooter">
+              <div class="venue-card-item">
+                <div class="venue-info-inline">
+                  <span class="venue-pin-icon">🏛</span>
+                  <div class="venue-inline-text">
+                    <strong id="folioVenueTitle">Sneha Auditorium</strong>
+                    <span id="folioVenueAddress">Kadappayil Jn., Thevalakara, Kollam, Kerala</span>
+                  </div>
                 </div>
+                <a href="https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara" target="_blank" rel="noopener" class="btn-folio-directions" id="folioVenueMapsLink">
+                  <span>Open in Google Maps</span>
+                  <i>↗</i>
+                </a>
               </div>
-              <a href="https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara" target="_blank" rel="noopener" class="btn-folio-directions" id="folioVenueMapsLink">
-                <span>Open in Google Maps</span>
-                <i>↗</i>
-              </a>
             </div>
 
             <!-- Best Wishes Signature from Card -->
@@ -345,7 +347,7 @@
         <div class="scratch-status-bar">
           <span class="sparkle-icon">✦</span>
           <span id="scratchPercentText" class="status-txt">Brush with finger or cursor to uncover the dates</span>
-          <button class="btn-quick-reveal" id="instantRevealBtn" type="button">Unveil All Instantly ✧</button>
+          <button class="btn-quick-reveal" id="instantRevealBtn" type="button">Unveil Instantly ✧</button>
         </div>
 
       </div>

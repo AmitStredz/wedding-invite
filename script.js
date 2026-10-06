@@ -689,19 +689,36 @@ document.addEventListener('DOMContentLoaded', () => {
      ═══════════════════════════════════════════════════════════ */
   const PARTY_CONFIG = {
     bride: {
-      reception: {
-        badge: 'THE RECEPTION',
-        date: 'Saturday, 28 Nov 2026',
-        time: '5:00 PM Onwards',
-        hijri: '',
-        loc: 'Sneha Auditorium, Thevalakara',
-        note: 'An evening of joyful blessings, family togetherness, and grand dinner.'
+      wings: {
+        left: {
+          badge: 'THE RECEPTION',
+          icon: '✨',
+          date: 'Saturday, 28 Nov 2026',
+          time: '5:00 PM Onwards',
+          hijri: '',
+          loc: 'Sneha Auditorium, Thevalakara',
+          note: 'An evening of joyful blessings, family togetherness, and grand dinner.',
+          isNikah: false
+        },
+        right: {
+          badge: 'THE SACRED NIKAH',
+          icon: '💍',
+          date: 'Sunday, 29 Nov 2026',
+          time: '12:00 Noon & 12:30 PM',
+          hijri: '19th Jum. al-Akhir 1448',
+          loc: 'Sneha Auditorium, Kadappayil Jn.',
+          note: 'The sacred Nikah solemnisation followed by traditional festive lunch.',
+          isNikah: true
+        }
       },
-      venueFooter: {
-        title: 'Sneha Auditorium',
-        address: 'Kadappayil Jn., Thevalakara, Kollam, Kerala',
-        mapsUrl: 'https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara'
-      },
+      venues: [
+        {
+          tag: 'CEREMONY VENUE',
+          title: 'Sneha Auditorium',
+          address: 'Kadappayil Jn., Thevalakara, Kollam, Kerala',
+          mapsUrl: 'https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara'
+        }
+      ],
       bestWishes: {
         label: 'With Best Wishes :',
         name: 'Farhana Ibrahim'
@@ -713,19 +730,42 @@ document.addEventListener('DOMContentLoaded', () => {
       footerDate: '28 & 29 November 2026 · Thevalakara, Kollam'
     },
     groom: {
-      reception: {
-        badge: 'THE RECEPTION',
-        date: 'Monday, 30 Nov 2026',
-        time: '11:30 AM TO 2:00 PM',
-        hijri: '(Jamaat-ul-Akhir 20, 1448)',
-        loc: 'Shakthi Auditorium, Alappuzha',
-        note: 'The grand wedding reception celebration and feast in honour of the newlyweds.'
+      wings: {
+        left: {
+          badge: 'THE SACRED NIKAH',
+          icon: '💍',
+          date: 'Sunday, 29 Nov 2026',
+          time: '12:00 Noon & 12:30 PM',
+          hijri: '19th Jum. al-Akhir 1448',
+          loc: 'Sneha Auditorium, Kadappayil Jn.',
+          note: 'The sacred Nikah solemnisation followed by traditional festive lunch.',
+          isNikah: true
+        },
+        right: {
+          badge: 'THE RECEPTION',
+          icon: '✨',
+          date: 'Monday, 30 Nov 2026',
+          time: '11:30 AM TO 2:00 PM',
+          hijri: '(Jamaat-ul-Akhir 20, 1448)',
+          loc: 'Shakthi Auditorium, Alappuzha',
+          note: 'The grand wedding reception celebration and feast in honour of the newlyweds.',
+          isNikah: false
+        }
       },
-      venueFooter: {
-        title: 'Shakthi Auditorium',
-        address: 'Alappuzha, Kerala',
-        mapsUrl: 'https://maps.google.com/?q=Shakthi+Auditorium+Alappuzha'
-      },
+      venues: [
+        {
+          tag: 'NIKAH VENUE · 29 NOV',
+          title: 'Sneha Auditorium',
+          address: 'Kadappayil Jn., Thevalakara, Kollam, Kerala',
+          mapsUrl: 'https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara'
+        },
+        {
+          tag: 'RECEPTION VENUE · 30 NOV',
+          title: 'Shakthi Auditorium',
+          address: 'Alappuzha, Kerala',
+          mapsUrl: 'https://maps.google.com/?q=Shakthi+Auditorium+Alappuzha'
+        }
+      ],
       bestWishes: {
         label: 'Sharing happiness :',
         name: 'ADI J'
@@ -834,41 +874,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let activeCountdownEpoch = PARTY_CONFIG.bride.countdown.targetEpoch;
 
-  function applyPartyDetails(partyKey) {
-    const config = PARTY_CONFIG[partyKey] || PARTY_CONFIG.bride;
+  function applyWingData(cardEl, data) {
+    if (!cardEl || !data) return;
 
-    // Reception Wing Card
-    const badgeEl = $('#receptionBadge');
-    const dateEl  = $('#receptionDate');
-    const timeEl  = $('#receptionTime');
-    const hijriEl = $('#receptionHijri');
-    const locEl   = $('#receptionLoc');
-    const noteEl  = $('#receptionNote');
+    if (data.isNikah) {
+      cardEl.classList.add('ceremony-wing-card--nikah');
+      cardEl.classList.remove('ceremony-wing-card--reception');
+    } else {
+      cardEl.classList.add('ceremony-wing-card--reception');
+      cardEl.classList.remove('ceremony-wing-card--nikah');
+    }
 
-    if (badgeEl) badgeEl.textContent = config.reception.badge;
-    if (dateEl)  dateEl.textContent  = config.reception.date;
-    if (timeEl)  timeEl.textContent  = config.reception.time;
-    if (locEl)   locEl.textContent   = config.reception.loc;
-    if (noteEl)  noteEl.textContent  = config.reception.note;
+    const iconEl  = cardEl.querySelector('.wing-icon-badge');
+    const badgeEl = cardEl.querySelector('.wing-badge');
+    const dateEl  = cardEl.querySelector('.wing-date');
+    const timeEl  = cardEl.querySelector('.wing-time');
+    const hijriEl = cardEl.querySelector('.wing-hijri');
+    const locEl   = cardEl.querySelector('.wing-loc');
+    const noteEl  = cardEl.querySelector('.wing-note');
+
+    if (iconEl)  iconEl.textContent  = data.icon;
+    if (badgeEl) badgeEl.textContent = data.badge;
+    if (dateEl)  dateEl.textContent  = data.date;
+    if (timeEl)  timeEl.textContent  = data.time;
+    if (locEl)   locEl.textContent   = data.loc;
+    if (noteEl)  noteEl.textContent  = data.note;
 
     if (hijriEl) {
-      if (config.reception.hijri) {
-        hijriEl.textContent = config.reception.hijri;
+      if (data.hijri) {
+        hijriEl.textContent = data.hijri;
         hijriEl.style.display = 'block';
       } else {
         hijriEl.textContent = '';
         hijriEl.style.display = 'none';
       }
     }
+  }
 
-    // Venue Footer
-    const vTitle = $('#folioVenueTitle');
-    const vAddr  = $('#folioVenueAddress');
-    const vLink  = $('#folioVenueMapsLink');
+  function applyPartyDetails(partyKey) {
+    const config = PARTY_CONFIG[partyKey] || PARTY_CONFIG.bride;
 
-    if (vTitle) vTitle.textContent = config.venueFooter.title;
-    if (vAddr)  vAddr.textContent  = config.venueFooter.address;
-    if (vLink)  vLink.href         = config.venueFooter.mapsUrl;
+    // Apply Left and Right Ceremony Wings in Chronological Date Order
+    const leftCard  = $('#wingCardLeft');
+    const rightCard = $('#wingCardRight');
+
+    applyWingData(leftCard, config.wings.left);
+    applyWingData(rightCard, config.wings.right);
+
+    // Apply Venue Footer Cards (single or dual auditoriums)
+    const venueFooter = $('#folioVenueFooter');
+    if (venueFooter && Array.isArray(config.venues)) {
+      venueFooter.innerHTML = config.venues.map(v => `
+        <div class="venue-card-item">
+          <div class="venue-info-inline">
+            <span class="venue-pin-icon" aria-hidden="true">🏛</span>
+            <div class="venue-inline-text">
+              ${v.tag ? `<span class="venue-tag-badge">${v.tag}</span>` : ''}
+              <strong>${v.title}</strong>
+              <span>${v.address}</span>
+            </div>
+          </div>
+          <a href="${v.mapsUrl}" target="_blank" rel="noopener" class="btn-folio-directions">
+            <span>Open in Google Maps</span>
+            <i>↗</i>
+          </a>
+        </div>
+      `).join('');
+    }
 
     // Best Wishes (Folio)
     const bwLabel = $('#folioBestWishesLabel');
