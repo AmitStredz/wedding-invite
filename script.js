@@ -803,12 +803,15 @@ document.addEventListener('DOMContentLoaded', () => {
     friends: [
       { src: 'assets/card-images/1.jpeg', alt: 'Cherished Moment 1' },
       { src: 'assets/card-images/2.jpeg', alt: 'Cherished Moment 2' },
-      { src: 'assets/card-images/3.jpeg', alt: 'Cherished Moment 3' },
+      { src: 'assets/card-images/9.png',   alt: 'Family Moment 3' },
       { src: 'assets/card-images/4.jpeg', alt: 'Cherished Moment 4' },
       { src: 'assets/card-images/5.jpeg', alt: 'Cherished Moment 5' },
+      { src: 'assets/card-images/3.jpeg', alt: 'Cherished Moment 3' },
       { src: 'assets/card-images/6.jpeg', alt: 'Cherished Moment 6' },
+      { src: 'assets/card-images/10.png',  alt: 'Family Moment 4' },
       { src: 'assets/card-images/7.jpeg', alt: 'Cherished Moment 7' },
-      { src: 'assets/card-images/8.jpeg', alt: 'Cherished Moment 8' }
+      { src: 'assets/card-images/8.jpeg', alt: 'Cherished Moment 8' },
+      { src: 'assets/card-images/11.png',  alt: 'Family Moment 5' }
     ],
     // Family: 2, 3, 9, 10, 11
     family: [

@@ -1836,12 +1836,12 @@ a {
 
 /* Left Side: Organic Watercolor Artwork (Dissolves Seamlessly with the Canvas Background) */
 .rings-watercolor-column {
-  flex: 0 0 auto;
+  flex: 0 0 clamp(480px, 54vw, 760px);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 100%;
+  height: auto;
   min-width: 0;
 }
 
@@ -1849,7 +1849,7 @@ a {
   position: relative;
   width: fit-content;
   max-width: 100%;
-  height: 100%;
+  height: auto;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -1860,19 +1860,19 @@ a {
 /* Top Foliage Branch — Draped Gracefully over Top-Left of Artwork */
 .rings-foliage-accent {
   position: absolute;
-  top: -14px;
-  left: 6px;
-  width: clamp(145px, 17vw, 210px);
+  top: -16px;
+  left: -14px;
+  width: clamp(140px, 16vw, 200px);
   z-index: 25;
   pointer-events: none;
-  transform: rotate(6deg);
-  transform-origin: top left;
+  transform: rotate(-6deg);
+  transform-origin: bottom left;
   filter: drop-shadow(0 6px 14px rgba(37, 57, 43, 0.12));
   transition: transform 0.4s ease;
 }
 
 .rings-watercolor-wrapper:hover .rings-foliage-accent {
-  transform: rotate(9deg) scale(1.02);
+  transform: rotate(-3deg) scale(1.02);
 }
 
 /* The Watercolor Couple Artwork Canvas — Majestic & Expansive */
@@ -1882,15 +1882,17 @@ a {
   align-items: center;
   justify-content: center;
   width: fit-content;
-  height: 100%;
-  max-height: clamp(580px, 88vh, 880px);
+  height: auto;
+  max-height: clamp(620px, 90vh, 940px);
 }
 
 .rings-watercolor-couple-img {
   display: block;
   width: auto;
-  height: 100%;
-  max-height: clamp(580px, 88vh, 880px);
+  height: auto;
+  max-height: clamp(620px, 90vh, 940px);
+  max-width: min(680px, 54vw);
+  object-fit: contain;
   object-position: center;
   mix-blend-mode: multiply;
   filter: contrast(105%) saturate(108%) brightness(99%);
@@ -1920,9 +1922,9 @@ a {
 /* Floral Bouquet Overlapping Bottom Left Corner */
 .rings-bouquet-accent {
   position: absolute;
-  bottom: -10px;
-  left: 6px;
-  width: clamp(160px, 18vw, 230px);
+  bottom: -16px;
+  left: -20px;
+  width: clamp(155px, 18vw, 220px);
   z-index: 30;
   pointer-events: none;
   filter: drop-shadow(0 8px 18px rgba(37, 57, 43, 0.14));
@@ -1936,8 +1938,8 @@ a {
 /* Floating Blessing Chip */
 .rings-blessing-chip {
   position: absolute;
-  bottom: 14px;
-  right: 14px;
+  bottom: 8px;
+  right: -8px;
   z-index: 28;
   background: rgba(255, 255, 255, 0.95);
   border: 1.2px solid var(--gold-ochre);
@@ -2726,14 +2728,117 @@ a {
   .folio-medallion { width: 44px; height: 44px; top: -20px; }
   .unveil-ornament-divider { width: min(80vw, 280px); }
 
+  .rings-sticky-viewport {
+    height: 94vh;
+    top: 3vh;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rings-split-layout {
+    flex-direction: column;
+    gap: 8px;
+    height: auto;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rings-watercolor-column {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .rings-watercolor-wrapper {
+    position: relative;
+    width: fit-content;
+    max-width: 95vw;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .rings-watercolor-canvas {
+    width: fit-content;
+    max-width: 100%;
+    max-height: 58vh;
+    height: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rings-watercolor-couple-img {
+    max-height: 58vh;
+    height: auto;
+    width: auto;
+    max-width: min(94vw, 500px);
+    object-fit: contain;
+    object-position: center;
+    mask-image: 
+      linear-gradient(to bottom, transparent 0%, black 15px, black calc(100% - 20px), transparent 100%),
+      linear-gradient(to right, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
+    -webkit-mask-image: 
+      linear-gradient(to bottom, transparent 0%, black 15px, black calc(100% - 20px), transparent 100%),
+      linear-gradient(to right, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
+  }
+
+  .rings-foliage-accent {
+    width: clamp(110px, 24vw, 155px);
+    top: -12px;
+    left: -12px;
+    transform: rotate(-6deg);
+    transform-origin: bottom left;
+  }
+
+  .rings-bouquet-accent {
+    width: clamp(120px, 26vw, 170px);
+    bottom: -12px;
+    left: -16px;
+  }
+
+  .rings-blessing-chip {
+    bottom: 4px;
+    right: -6px;
+    padding: 4px 14px;
+  }
+
+  .rings-right-content-wrap {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .rings-heading-wrap {
+    margin-bottom: 2px;
+  }
+
+  .rings-kicker {
+    font-size: 0.65rem;
+  }
+
+  .union-caption {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    max-width: 90vw;
+  }
+
   .rings-arena {
-    height: clamp(280px, 40vh, 380px);
+    height: clamp(140px, 20vh, 185px);
     max-width: 100%;
   }
 
   .ring-entity {
-    width: clamp(150px, 30vw, 240px);
-    height: clamp(130px, 26vw, 210px);
+    width: clamp(125px, 35vw, 180px);
+    height: clamp(105px, 29vw, 155px);
   }
 }
 
@@ -2803,35 +2908,101 @@ a {
     gap: 8px;
   }
 
+  .rings-sticky-viewport {
+    height: 94vh;
+    top: 3vh;
+    padding: 6px 10px;
+  }
+
   .rings-split-layout {
     flex-direction: column;
-    gap: 22px;
+    gap: 6px;
   }
 
   .rings-watercolor-column {
     flex: 0 0 auto;
-    width: min(360px, 88vw);
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .rings-watercolor-wrapper {
+    position: relative;
+    width: fit-content;
+    max-width: 96vw;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
   }
 
   .rings-watercolor-canvas {
-    max-height: 46vh;
+    width: fit-content;
+    max-width: 100%;
+    max-height: 58vh;
+    height: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .rings-watercolor-couple-img {
-    max-height: 46vh;
+    max-height: 58vh;
+    height: auto;
+    width: auto;
+    max-width: min(94vw, 460px);
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .rings-foliage-accent {
+    width: clamp(100px, 24vw, 140px);
+    top: -10px;
+    left: -10px;
+    transform: rotate(-6deg);
+    transform-origin: bottom left;
+  }
+
+  .rings-bouquet-accent {
+    width: clamp(115px, 26vw, 160px);
+    bottom: -10px;
+    left: -14px;
+  }
+
+  .rings-blessing-chip {
+    bottom: 4px;
+    right: -6px;
+    padding: 4px 12px;
   }
 
   .rings-right-content-wrap {
     width: 100%;
   }
 
+  .rings-heading-wrap {
+    margin-bottom: 2px;
+  }
+
+  .rings-kicker {
+    font-size: 0.65rem;
+  }
+
+  .union-caption {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+
   .rings-arena {
-    height: clamp(220px, 34vh, 300px);
+    height: clamp(140px, 20vh, 180px);
   }
 
   .ring-entity {
-    width: clamp(130px, 38vw, 200px);
-    height: clamp(115px, 33vw, 175px);
+    width: clamp(120px, 35vw, 175px);
+    height: clamp(100px, 29vw, 150px);
   }
 
   /* Keep the ∞ ribbon on-screen in the narrower stacked layout */
