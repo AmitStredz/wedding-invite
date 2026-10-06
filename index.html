@@ -162,9 +162,9 @@
           </div>
 
           <div class="editorial-preamble">
-            <p class="family-tagline">Together with their families</p>
+            <p class="family-tagline">Cordially invite your esteemed presence with family on the auspicious occasion of the marriage of our beloved Daughter</p>
             <h3 class="parents-highlight">Mr. Ibrahim Kutty M &amp; Mrs. Sheeja M P</h3>
-            <p class="invite-action">request the honour of your presence at the wedding ceremony of their beloved daughter</p>
+            <p class="parents-address">Pallickal Puthen Veedu, Palackal, Thevalakara P.O., Kollam<br><a href="tel:9847989971" class="parents-phone">Ph: 9847989971</a></p>
           </div>
 
           <!-- Grand Names Display in Elegant Title Case Script -->
@@ -184,7 +184,8 @@
             <div class="groom-profile">
               <span class="role-ribbon">The Groom</span>
               <h1 class="couple-name">Amalkar Zulfikar</h1>
-              <p class="lineage-text">Son of Mr. Zulfikar &amp; Mrs. Saheera Beegum<br>New House, Mullathu Ward, Thiruvampady P.O., Alappuzha - 2</p>
+              <p class="lineage-text">S/o Mr. Zulfikar &amp; Mrs. Saheera Beegum<br>New House, Mullathu Ward, Thiruvampady P.O., Alappuzha - 2</p>
+              <p class="insha-allah-tag">“Insha Allah”</p>
             </div>
           </div>
 
@@ -324,6 +325,12 @@
               </a>
             </div>
 
+            <!-- Best Wishes Signature from Card -->
+            <div class="folio-best-wishes-bar">
+              <span class="best-wishes-label">With Best Wishes :</span>
+              <span class="best-wishes-name">Farhana Ibrahim</span>
+            </div>
+
           </div>
 
           <!-- HTML5 Canvas: Hand-brushed Liquid 24K Gold Leaf Overlay -->
@@ -349,16 +356,16 @@
       
       <!-- Ambient Animated Overlaid Photo Background -->
       <div class="memories-cinematic-bg" aria-hidden="true">
-        <div class="memory-bg-slide slide-1" style="background-image: url('couple-real.png')"></div>
-        <div class="memory-bg-slide slide-2" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1500&q=80')"></div>
-        <div class="memory-bg-slide slide-3" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1500&q=80')"></div>
-        <div class="memories-veil"></div>
+        <div class="memory-bg-slide slide-1" style="background-image: url('couple-real.jpg')"></div>
+        <div class="memory-bg-slide slide-2" style="background-image: url('couple-watercolor-2.jpg')"></div>
+        <div class="memory-bg-slide slide-3" style="background-image: url('9.png')"></div>
+        <!-- <div class="memories-veil"></div> -->
       </div>
 
       <div class="memories-header-container">
-        <div class="memories-title">✦ Our Gallery ✦</div>
-        <!-- <h2 class="memories-title">Precious Moments</h2> -->
-        <!-- <p class="memories-subtitle">Hanging memories of our beautiful journey together.</p> -->
+        <div class="section-tag-pill">✦ Our Journey ✦</div>
+        <h2 class="memories-title">Moments in Time</h2>
+        <p class="memories-subtitle">A collection of sweet memories and cherished chapters together</p>
       </div>
 
       <!-- Golden Fairy-Light Hanging Wire Container -->
@@ -499,7 +506,7 @@
           
           <!-- LEFT SIDE: Prominent Portrait Image -->
           <div class="rings-left-portrait-wrap">
-            <img src="couple-real.png" alt="Fathima &amp; Amalkar" class="rings-couple-portrait-img" />
+            <img src="11.png" alt="Fathima &amp; Amalkar" class="rings-couple-portrait-img" />
           </div>
 
           <!-- RIGHT SIDE: Heading & Ring Interlocking Arena -->
@@ -534,6 +541,27 @@
                 <circle id="threadNodeRight" cx="400" cy="100" r="5" fill="#FFF3CC" />
               </svg>
 
+              <!-- The ribbon re-shaping into an Eternity Knot (∞) once the rings interlock -->
+              <svg class="ring-infinity-svg" id="ringInfinitySvg" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                <defs>
+                  <linearGradient id="infinityGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stop-color="#C59B3C" stop-opacity="0.15" />
+                    <stop offset="22%"  stop-color="#E8C97E" stop-opacity="0.95" />
+                    <stop offset="50%"  stop-color="#FFFBE8" stop-opacity="1" />
+                    <stop offset="78%"  stop-color="#E8C97E" stop-opacity="0.95" />
+                    <stop offset="100%" stop-color="#C59B3C" stop-opacity="0.15" />
+                  </linearGradient>
+                  <filter id="infinityGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="4" result="b" />
+                    <feComposite in="SourceGraphic" in2="b" operator="over" />
+                  </filter>
+                </defs>
+                <path id="infinityPath"
+                      d="M 200 110 C 200 50, 8 50, 8 110 C 8 170, 200 170, 200 110 C 200 50, 392 50, 392 110 C 392 170, 200 170, 200 110"
+                      fill="none" stroke="url(#infinityGrad)" stroke-width="4"
+                      stroke-linecap="round" filter="url(#infinityGlow)" />
+              </svg>
+
               <!-- Ring A: Bride (Fathima - Rose Gold Twin Loop with Diamonds) -->
               <div class="ring-entity ring-bride-real" id="brideRing">
                 <img src="ring-real.png" alt="Fathima's Wedding Ring" class="ring-real-img" />
@@ -561,31 +589,77 @@
     </section>
 
     <!-- ─── SECTION 5: COUNTDOWN & WARM BLESSINGS ─── -->
-    <section class="grand-closing-section">
+    <section class="grand-closing-section" id="countdownSection">
       
-      <div class="countdown-grand-card">
-        <span class="countdown-eyebrow">COUNTING EVERY HEARTBEAT</span>
-        <h3 class="countdown-headline">Until The Celebrations Begin</h3>
-        <p class="countdown-target">Sunday, 29 November 2026 · Sneha Auditorium</p>
+      <!-- Subtle Floating Ambient Floral Accents -->
+      <img src="foliage-branch.png" alt="" class="closing-foliage-left" aria-hidden="true" />
+      <img src="foliage-branch.png" alt="" class="closing-foliage-right" aria-hidden="true" />
 
+      <!-- Grand Countdown Card -->
+      <div class="countdown-grand-card">
+        <div class="card-ornament-corner top-left" aria-hidden="true"></div>
+        <div class="card-ornament-corner top-right" aria-hidden="true"></div>
+        <div class="card-ornament-corner bottom-left" aria-hidden="true"></div>
+        <div class="card-ornament-corner bottom-right" aria-hidden="true"></div>
+
+        <div class="countdown-header-badge">
+          <span class="badge-sparkle">✦</span>
+          <span class="countdown-eyebrow">COUNTING EVERY HEARTBEAT</span>
+          <span class="badge-sparkle">✦</span>
+        </div>
+
+        <h3 class="countdown-headline">Until The Celebrations Begin</h3>
+        
+        <div class="gold-filigree-divider" aria-hidden="true">
+          <span class="filigree-line"></span>
+          <span class="filigree-symbol">❧ ⚜ ❧</span>
+          <span class="filigree-line"></span>
+        </div>
+
+        <p class="countdown-target">Sunday, 29 November 2026 · Sneha Auditorium, Thevalakara</p>
+
+        <!-- Mechanical Smooth Rolling Countdown Units -->
         <div class="countdown-units-flex" id="grandTimer">
           <div class="time-box">
-            <span class="time-digit" data-unit="days">00</span>
+            <div class="time-digit-wrapper">
+              <div class="time-digit" data-unit="days">00</div>
+            </div>
             <span class="time-label">DAYS</span>
           </div>
-          <div class="time-sep">:</div>
+
+          <div class="time-sep" aria-hidden="true">
+            <span class="sep-dot"></span>
+            <span class="sep-dot"></span>
+          </div>
+
           <div class="time-box">
-            <span class="time-digit" data-unit="hours">00</span>
+            <div class="time-digit-wrapper">
+              <div class="time-digit" data-unit="hours">00</div>
+            </div>
             <span class="time-label">HOURS</span>
           </div>
-          <div class="time-sep">:</div>
+
+          <div class="time-sep" aria-hidden="true">
+            <span class="sep-dot"></span>
+            <span class="sep-dot"></span>
+          </div>
+
           <div class="time-box">
-            <span class="time-digit" data-unit="minutes">00</span>
+            <div class="time-digit-wrapper">
+              <div class="time-digit" data-unit="minutes">00</div>
+            </div>
             <span class="time-label">MINUTES</span>
           </div>
-          <div class="time-sep">:</div>
+
+          <div class="time-sep" aria-hidden="true">
+            <span class="sep-dot"></span>
+            <span class="sep-dot"></span>
+          </div>
+
           <div class="time-box">
-            <span class="time-digit" data-unit="seconds">00</span>
+            <div class="time-digit-wrapper">
+              <div class="time-digit" data-unit="seconds">00</div>
+            </div>
             <span class="time-label">SECONDS</span>
           </div>
         </div>
@@ -593,13 +667,30 @@
 
       <!-- Quick Love Wish Note / RSVP -->
       <div class="wishes-card">
+        <div class="card-ornament-corner top-left" aria-hidden="true"></div>
+        <div class="card-ornament-corner top-right" aria-hidden="true"></div>
+        <div class="card-ornament-corner bottom-left" aria-hidden="true"></div>
+        <div class="card-ornament-corner bottom-right" aria-hidden="true"></div>
+
+        <div class="wishes-header-badge">
+          <span class="wishes-feather-icon">❦</span>
+          <span class="wishes-eyebrow">HEARTFELT PRAYERS</span>
+          <span class="wishes-feather-icon">❦</span>
+        </div>
+
         <h4 class="wishes-title">Leave Your Duas &amp; Wishes</h4>
         <p class="wishes-sub">Your prayers and kind words are the most precious gift to the couple.</p>
         
         <form class="simple-wish-form" id="wishForm">
-          <input type="text" id="guestNameInput" placeholder="Your Name" required />
-          <textarea id="guestMsgInput" rows="3" placeholder="Write your heartfelt wish or dua..." required></textarea>
-          <button type="submit" class="btn-send-wish">Send With Love ❤</button>
+          <div class="form-input-field">
+            <input type="text" id="guestNameInput" placeholder="Your Name / Family" required />
+          </div>
+          <div class="form-input-field">
+            <textarea id="guestMsgInput" rows="3" placeholder="Write your heartfelt wish or dua..." required></textarea>
+          </div>
+          <button type="submit" class="btn-send-wish">
+            <span class="btn-text">Send With Love ❤</span>
+          </button>
         </form>
 
         <div class="wish-submitted-msg" id="wishThanks" hidden>
@@ -610,8 +701,15 @@
       </div>
 
       <footer class="invitation-footer">
-        <div class="footer-names">Fathima &amp; Amalkar</div>
-        <div class="footer-tagline">With immense love and gratitude from both families</div>
+        <div class="footer-filigree-top" aria-hidden="true">
+          <span class="filigree-line"></span>
+          <span class="filigree-symbol">✦ ❦ ✦</span>
+          <span class="filigree-line"></span>
+        </div>
+        <div class="footer-best-wishes">
+          <span class="wishes-label">With Best Wishes :</span>
+          <span class="wishes-person">Farhana Ibrahim</span>
+        </div>
         <div class="footer-date">28 &amp; 29 November 2026 · Thevalakara, Kollam</div>
       </footer>
 

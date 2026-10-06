@@ -379,29 +379,63 @@ document.addEventListener('DOMContentLoaded', () => {
   const ringSparkle        = $('#ringSparkle');
   const ringsPhotoBackdrop = $('#ringsPhotoBackdrop');
   const unionStatus        = $('#unionStatus');
+  const infinitySvg        = $('#ringInfinitySvg');
+  const infinityPath       = $('#infinityPath');
+
+  /* Scroll-progress phase map (0 = section enters, 1 = section leaves) */
+  const RING_TRAVEL_END = 0.62;  // rings finish travelling & interlock here
+  const INFINITY_START  = 0.54;  // ribbon begins re-shaping toward the ∞
+  const INFINITY_END    = 0.92;  // ∞ fully formed and holding
+
+  // Cache the ∞ path length so we can "draw" it with stroke-dashoffset
+  let infinityLength = 0;
+  if (infinityPath && typeof infinityPath.getTotalLength === 'function') {
+    infinityLength = infinityPath.getTotalLength();
+    if (infinityLength > 0) {
+      infinityPath.style.strokeDasharray  = `${infinityLength}`;
+      infinityPath.style.strokeDashoffset = `${infinityLength}`;
+    }
+  }
 
   function updateRingsScrollMotion() {
     if (!ringsUnionSection || !brideRing || !groomRing) return;
 
     const rect = ringsUnionSection.getBoundingClientRect();
     const windowH = window.innerHeight;
-    
+
     // Normalized scroll progress inside the rings section (0 to 1)
     const totalDist = ringsUnionSection.offsetHeight - windowH;
     const scrolled = -rect.top;
-    const progress = Math.max(0, Math.min(1, scrolled / totalDist));
+    const rawProgress = Math.max(0, Math.min(1, scrolled / Math.max(1, totalDist)));
 
-    // Smooth cubic ease curve
-    const easeP = progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+    /* Ease the raw progress so the rings do not start moving the instant the
+       section pins — they hold still briefly, then accelerate gently and
+       decelerate into the interlock. */
+    const progress = rawProgress < 0.08
+      ? 0
+      : Math.min(1, (rawProgress - 0.08) / 0.92);
+
+    // Ring travel completes at RING_TRAVEL_END, then holds while the ∞ forms.
+    const raceP = Math.max(0, Math.min(1, progress / RING_TRAVEL_END));
+
+    // Strong ease-out: quickest early, slowest as they meet (a long graceful settle)
+    const easeP = 1 - Math.pow(1 - raceP, 3);
 
     const vw = window.innerWidth;
     const isMobile = vw < 768;
-    
-    // Starting distance and target meeting position (touching side by side without overlapping)
+
+    // Starting distance and stopping distance for the two rings
     const arenaEl = $('#ringsArena');
-    const arenaWidth = arenaEl ? arenaEl.clientWidth : (isMobile ? vw * 0.9 : 500);
-    const startOffset = isMobile ? arenaWidth * 0.38 : arenaWidth * 0.32;
-    const targetOffset = isMobile ? 22 : 32;
+    const arenaWidth = arenaEl ? arenaEl.clientWidth : (isMobile ? vw * 0.9 : 600);
+    const startOffset = arenaWidth * 0.34;
+
+    /* The ring artwork fills roughly 80% of its own PNG width, so we derive the
+       stopping distance from the ring's *rendered* width instead of a magic
+       number. 0.40 puts the two bands ~20% overlapped — enough to read as an
+       interlock while keeping both rings clearly visible (no full stacking). */
+    const ringEntityW = brideRing.offsetWidth || (isMobile ? 160 : 300);
+    const bandWidth = ringEntityW * 0.80;
+    const targetOffset = Math.min(bandWidth * 0.40, startOffset * 0.72);
 
     // Bride Ring (starts left with 3D Y-tilt, moves to center)
     const brideCurrentX = -startOffset + ((startOffset - targetOffset) * easeP);
@@ -413,8 +447,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const groomRotateY = -28 * (1 - easeP);
     const groomRotateZ = 10 * (1 - easeP);
 
-    brideRing.style.transform = `translate3d(${brideCurrentX}px, 0, 0) rotateY(${brideRotateY}deg) rotateZ(${brideRotateZ}deg) scale(${0.85 + easeP * 0.18})`;
-    groomRing.style.transform = `translate3d(${groomCurrentX}px, 0, 0) rotateY(${groomRotateY}deg) rotateZ(${groomRotateZ}deg) scale(${0.85 + easeP * 0.18})`;
+    brideRing.style.transform = `translate3d(${brideCurrentX}px, 0, 0) rotateY(${brideRotateY}deg) rotateZ(${brideRotateZ}deg) scale(${0.82 + easeP * 0.22})`;
+    groomRing.style.transform = `translate3d(${groomCurrentX}px, 0, 0) rotateY(${groomRotateY}deg) rotateZ(${groomRotateZ}deg) scale(${0.82 + easeP * 0.22})`;
+
+    // How far the ribbon has re-shaped into the eternity knot (0 → 1)
+    const infP = Math.max(0, Math.min(1, (progress - INFINITY_START) / (INFINITY_END - INFINITY_START)));
 
     // Dynamic Golden Destiny Thread SVG Curve calculation
     const goldenThreadPath = $('#goldenThreadPath');
@@ -424,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (goldenThreadPath && arenaEl) {
       const svgW = 800;
       const svgH = 200;
-      
+
       const scaleRatio = svgW / arenaWidth;
 
       // Calculate exact X centers for each ring inside the SVG viewBox coordinate system
@@ -435,33 +472,55 @@ document.addEventListener('DOMContentLoaded', () => {
       // Quadratic curve sag flexes dynamically as rings get closer
       const dipY = cy + (35 * (1 - easeP));
 
-      // As rings interlock (> 78%), straighten and collapse thread into golden spark
-      if (progress > 0.78) {
-        goldenThreadPath.setAttribute('d', `M ${leftX} ${cy} Q ${svgW/2} ${cy} ${rightX} ${cy}`);
-        goldenThreadPath.setAttribute('stroke-opacity', '0.2');
+      // The thread hands over to the ∞ as it forms
+      const threadAlpha = Math.max(0, 1 - EasingClamp(infP * 1.5)) * (1 - progress * 0.55);
+
+      if (progress > RING_TRAVEL_END) {
+        goldenThreadPath.setAttribute('d', `M ${leftX} ${cy} Q ${svgW / 2} ${cy} ${rightX} ${cy}`);
       } else {
-        goldenThreadPath.setAttribute('d', `M ${leftX} ${cy} Q ${svgW/2} ${dipY} ${rightX} ${cy}`);
-        goldenThreadPath.setAttribute('stroke-opacity', `${1 - progress * 0.8}`);
+        goldenThreadPath.setAttribute('d', `M ${leftX} ${cy} Q ${svgW / 2} ${dipY} ${rightX} ${cy}`);
       }
+      goldenThreadPath.setAttribute('stroke-opacity', threadAlpha.toFixed(3));
 
       if (threadNodeLeft) {
         threadNodeLeft.setAttribute('cx', `${leftX}`);
         threadNodeLeft.setAttribute('cy', `${cy}`);
+        threadNodeLeft.setAttribute('opacity', threadAlpha.toFixed(3));
       }
       if (threadNodeRight) {
         threadNodeRight.setAttribute('cx', `${rightX}`);
         threadNodeRight.setAttribute('cy', `${cy}`);
+        threadNodeRight.setAttribute('opacity', threadAlpha.toFixed(3));
       }
     }
 
-    // Rings meet in center (> 78% scroll progress)
-    if (progress > 0.78) {
-      if (ringSparkle) ringSparkle.classList.add('is-active');
-      if (unionStatus) unionStatus.classList.add('is-visible');
-    } else {
-      if (ringSparkle) ringSparkle.classList.remove('is-active');
-      if (unionStatus) unionStatus.classList.remove('is-visible');
+    // ── The ribbon re-shapes into the ∞ eternity knot ──
+    if (infinityPath && infinityLength > 0) {
+      // Draw the knot progressively along the path
+      const drawn = 1 - EasingClamp(infP);
+      infinityPath.style.strokeDashoffset = `${(infinityLength * drawn).toFixed(2)}`;
+
+      if (infinitySvg) {
+        // Grow into place with a soft settle, and breathe once fully formed
+        const scale = 0.82 + EasingClamp(infP) * 0.18;
+        const breathe = infP > 0.98 ? 1 + Math.sin(Date.now() / 900) * 0.012 : 1;
+        infinitySvg.style.transform = `scale(${(scale * breathe).toFixed(4)})`;
+        infinitySvg.style.opacity = EasingClamp(infP * 1.25).toFixed(3);
+      }
     }
+
+    // Interlock flash fires briefly as the rings meet, then settles
+    if (ringSparkle) {
+      const flashing = progress > 0.58 && progress < 0.74;
+      ringSparkle.classList.toggle('is-active', flashing);
+    }
+    if (unionStatus) {
+      unionStatus.classList.toggle('is-visible', progress > RING_TRAVEL_END);
+    }
+  }
+
+  function EasingClamp(v) {
+    return v < 0 ? 0 : (v > 1 ? 1 : v);
   }
 
   window.addEventListener('scroll', updateRingsScrollMotion, { passive: true });
@@ -626,12 +685,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ═══════════════════════════════════════════════════════════
      5. LIVE COUNTDOWN TIMER (Target: 29 Nov 2026, 12:00 PM IST)
+        With Smooth Mechanical Rolling Number Reels
      ═══════════════════════════════════════════════════════════ */
   const weddingEpoch = new Date('2026-11-29T12:00:00+05:30').getTime();
   const digitDays    = $('[data-unit="days"]');
   const digitHours   = $('[data-unit="hours"]');
   const digitMinutes = $('[data-unit="minutes"]');
   const digitSeconds = $('[data-unit="seconds"]');
+
+  function renderRollingDigitGroup(container, value, minDigits = 2) {
+    if (!container) return;
+    const str = String(Math.max(0, value)).padStart(minDigits, '0');
+    const chars = str.split('');
+
+    let wheels = container.querySelectorAll('.digit-wheel');
+    if (wheels.length !== chars.length) {
+      container.innerHTML = '';
+      chars.forEach(() => {
+        const wheel = document.createElement('div');
+        wheel.className = 'digit-wheel';
+        const strip = document.createElement('div');
+        strip.className = 'digit-strip';
+        for (let i = 0; i <= 9; i++) {
+          const span = document.createElement('span');
+          span.className = 'digit-num';
+          span.textContent = i;
+          strip.appendChild(span);
+        }
+        wheel.appendChild(strip);
+        container.appendChild(wheel);
+      });
+      wheels = container.querySelectorAll('.digit-wheel');
+    }
+
+    chars.forEach((ch, idx) => {
+      const num = parseInt(ch, 10);
+      const strip = wheels[idx].querySelector('.digit-strip');
+      if (strip) {
+        strip.style.transform = `translateY(-${num * 10}%)`;
+      }
+    });
+  }
 
   function updateGrandTimer() {
     const now = Date.now();
@@ -642,10 +736,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const m = Math.floor((diff / (1000 * 60)) % 60);
     const s = Math.floor((diff / 1000) % 60);
 
-    if (digitDays)    digitDays.textContent    = String(d).padStart(2, '0');
-    if (digitHours)   digitHours.textContent   = String(h).padStart(2, '0');
-    if (digitMinutes) digitMinutes.textContent = String(m).padStart(2, '0');
-    if (digitSeconds) digitSeconds.textContent = String(s).padStart(2, '0');
+    renderRollingDigitGroup(digitDays, d, 2);
+    renderRollingDigitGroup(digitHours, h, 2);
+    renderRollingDigitGroup(digitMinutes, m, 2);
+    renderRollingDigitGroup(digitSeconds, s, 2);
   }
 
   updateGrandTimer();

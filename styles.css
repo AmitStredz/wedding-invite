@@ -1408,6 +1408,63 @@ a {
   transform: translate(2px, -2px);
 }
 
+/* Best Wishes Signature from Card */
+.folio-best-wishes-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(197, 155, 60, 0.25);
+  text-align: center;
+}
+
+.best-wishes-label {
+  font-family: var(--font-title);
+  font-size: 0.76rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ochre-dark);
+  font-weight: 700;
+}
+
+.best-wishes-name {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--sage-deep);
+  line-height: 1.1;
+}
+
+.parents-address {
+  font-size: 0.88rem;
+  color: var(--ink-secondary);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.parents-phone {
+  color: var(--gold-ochre-dark);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.parents-phone:hover {
+  color: var(--sage-deep);
+  text-decoration: underline;
+}
+
+.insha-allah-tag {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--gold-ochre-dark);
+  margin-top: 4px;
+  font-weight: 600;
+}
+
 /* ─── Luxury Gilded Canvas Overlay ─── */
 .gilded-canvas-overlay {
   position: absolute;
@@ -1490,7 +1547,49 @@ a {
 }
 
 .memories-cinematic-bg {
-  display: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.memory-bg-slide {
+  position: absolute;
+  inset: -30px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  animation: kenBurnsFade 18s ease-in-out infinite;
+  filter: contrast(105%) saturate(85%) brightness(102%);
+}
+
+.memory-bg-slide.slide-1 {
+  animation-delay: 0s;
+}
+
+.memory-bg-slide.slide-2 {
+  animation-delay: 6s;
+}
+
+.memory-bg-slide.slide-3 {
+  animation-delay: 12s;
+}
+
+@keyframes kenBurnsFade {
+  0%   { opacity: 0; transform: scale(1.02); }
+  12%  { opacity: 0.5; }
+  33%  { opacity: 0.5; }
+  45%  { opacity: 0; transform: scale(1.08); }
+  100% { opacity: 0; }
+}
+
+.memories-veil {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(180deg, var(--canvas-bg) 0%, rgba(250, 245, 236, 0.72) 40%, rgba(250, 245, 236, 0.72) 60%, var(--canvas-bg) 100%),
+    radial-gradient(circle at 50% 50%, rgba(197, 155, 60, 0.08), transparent 70%);
 }
 
 .memories-content-container {
@@ -1503,25 +1602,34 @@ a {
 
 .memories-header-container {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   position: relative;
   z-index: 5;
   padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .memories-title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
   font-weight: 600;
   color: var(--sage-deep);
-  margin-bottom: 14px;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin: 0;
 }
 
 .memories-subtitle {
-  font-size: 1rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
   color: var(--ink-secondary);
-  max-width: 520px;
+  max-width: 540px;
   margin: 0 auto;
+  line-height: 1.5;
 }
 
 /* Golden Fairy-Light Hanging Wire Marquee Gallery */
@@ -1531,6 +1639,7 @@ a {
   padding: 50px 0 30px;
   overflow: hidden;
   user-select: none;
+  z-index: 10;
 }
 
 /* Golden Suspended Wire Strand */
@@ -1578,6 +1687,7 @@ a {
   width: max-content;
   animation: wireMarqueeScroll 38s linear infinite;
   padding-left: 16px;
+  z-index: 5;
 }
 
 .hanging-wire-container:hover .hanging-wire-track {
@@ -1646,16 +1756,16 @@ a {
 /* Hanging Photo Frame */
 .wire-photo-frame {
   position: relative;
-  background: #FFFFFF;
+  background: #FFFFFF !important;
   padding: 12px 12px 16px;
   border-radius: 16px;
-  border: 1.5px solid rgba(197, 155, 60, 0.5);
+  border: 1.8px solid rgba(197, 155, 60, 0.6);
   box-shadow: 
-    0 14px 32px rgba(37, 57, 43, 0.15),
-    0 4px 12px rgba(0, 0, 0, 0.08);
+    0 16px 36px rgba(37, 57, 43, 0.18),
+    0 4px 14px rgba(0, 0, 0, 0.1);
   aspect-ratio: 4 / 4.8;
   overflow: hidden;
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .wire-photo-frame img {
@@ -1665,7 +1775,7 @@ a {
   object-position: center 25%;
   border-radius: 10px;
   opacity: 1 !important;
-  filter: contrast(106%) brightness(105%) saturate(108%);
+  filter: contrast(108%) brightness(106%) saturate(110%) !important;
   transition: transform 0.5s ease;
 }
 
@@ -1678,15 +1788,17 @@ a {
    ═══════════════════════════════════════════════════════════ */
 .rings-union-section {
   position: relative;
-  height: 140vh;
+  /* Taller section = the same ring travel is spread over far more scroll,
+     which is what makes the motion feel slow and ceremonial. */
+  height: 230vh;
   padding: 60px 0;
   background: var(--canvas-bg-warm);
 }
 
 .rings-sticky-viewport {
   position: sticky;
-  top: 10vh;
-  height: 80vh;
+  top: 5vh;
+  height: 90vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1695,19 +1807,37 @@ a {
   overflow: hidden;
 }
 
+/* Soft Islamic arch halo behind the whole composition so the section reads as
+   a full scene rather than a blank panel. */
+.rings-sticky-viewport::before {
+  content: '';
+  position: absolute;
+  inset: 4% 6%;
+  border-radius: 50% 50% 14px 14px / 30% 30% 14px 14px;
+  border: 1.5px solid rgba(197, 155, 60, 0.32);
+  background:
+    radial-gradient(ellipse 70% 62% at 50% 34%, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0) 72%),
+    radial-gradient(ellipse 90% 80% at 50% 50%, rgba(197, 155, 60, 0.09), transparent 70%);
+  box-shadow: inset 0 0 90px rgba(244, 235, 221, 0.6);
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Side-by-Side Split Container */
 .rings-split-layout {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(24px, 5vw, 60px);
-  width: min(94vw, 1150px);
+  gap: clamp(20px, 4vw, 60px);
+  width: min(96vw, 1300px);
   max-width: 100%;
 }
 
 /* Left Side: Prominent Standalone Portrait Image (Bigger & Subtle Tilt) */
 .rings-left-portrait-wrap {
-  flex: 0 0 clamp(320px, 38vw, 460px);
+  flex: 0 0 clamp(320px, 42vw, 600px);
   position: relative;
   display: flex;
   justify-content: center;
@@ -1717,10 +1847,11 @@ a {
 .rings-couple-portrait-img {
   width: 100%;
   height: auto;
+  max-height: 76vh;
   object-fit: contain;
   border-radius: 16px;
   transform: rotate(-3deg);
-  box-shadow: 0 16px 40px rgba(37, 57, 43, 0.15);
+  box-shadow: 0 22px 55px rgba(37, 57, 43, 0.18);
   transition: transform 0.4s ease;
 }
 
@@ -1772,12 +1903,30 @@ a {
 .rings-arena {
   position: relative;
   width: 100%;
-  max-width: 540px;
-  height: 240px;
+  max-width: 640px;
+  height: clamp(300px, 46vh, 440px);
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 1200px;
+}
+
+/* Eternity Knot (∞) layer the ribbon reshapes into.
+   The path loops reach ~96% of this box, so the ribbon is deliberately sized
+   larger than the ring pair — it wraps around them and stays visible OUTSIDE
+   the rings rather than hiding behind them. */
+.ring-infinity-svg {
+  position: absolute;
+  inset: -9%;
+  width: 118%;
+  height: 118%;
+  pointer-events: none;
+  z-index: 8;
+  opacity: 0;
+  transform: scale(0.82);
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  overflow: visible;
 }
 
 /* Elegant Soft-Framed Couple Portrait Backdrop */
@@ -1821,8 +1970,8 @@ a {
 
 .ring-entity {
   position: absolute;
-  width: clamp(140px, 22vw, 240px);
-  height: clamp(120px, 18vw, 200px);
+  width: clamp(180px, 27vw, 310px);
+  height: clamp(160px, 24vw, 275px);
   z-index: 10;
   will-change: transform;
   display: flex;
@@ -1916,31 +2065,109 @@ a {
    ═══════════════════════════════════════════════════════════ */
 .grand-closing-section {
   position: relative;
-  padding: 80px 24px 40px;
+  padding: 90px 24px 50px;
   background: 
-    radial-gradient(circle at 50% 10%, rgba(197, 155, 60, 0.1), transparent 45%),
+    radial-gradient(circle at 50% 12%, rgba(197, 155, 60, 0.12), transparent 48%),
+    radial-gradient(circle at 50% 88%, rgba(37, 57, 43, 0.05), transparent 55%),
     var(--canvas-bg);
   color: var(--ink-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
+}
+
+.closing-foliage-left {
+  position: absolute;
+  top: 30px;
+  left: -50px;
+  width: 220px;
+  opacity: 0.15;
+  pointer-events: none;
+  transform: rotate(-15deg);
+  filter: sepia(0.3);
+}
+
+.closing-foliage-right {
+  position: absolute;
+  top: 100px;
+  right: -60px;
+  width: 240px;
+  opacity: 0.14;
+  pointer-events: none;
+  transform: scaleX(-1) rotate(12deg);
+  filter: sepia(0.3);
 }
 
 .countdown-grand-card {
   width: min(92vw, 760px);
-  padding: 40px 30px;
+  padding: 44px 32px;
   background: #FFFFFF;
-  border: 1.5px solid var(--gold-ochre);
-  border-radius: 16px;
+  border: 1px solid rgba(197, 155, 60, 0.45);
+  border-radius: 20px;
   text-align: center;
-  box-shadow: 0 16px 45px rgba(37, 57, 43, 0.08);
-  margin-bottom: 50px;
+  box-shadow: 
+    0 20px 50px rgba(37, 57, 43, 0.08),
+    inset 0 0 0 4px rgba(250, 245, 236, 0.9),
+    inset 0 0 0 5px rgba(197, 155, 60, 0.25);
+  position: relative;
+  margin-bottom: 45px;
+}
+
+.card-ornament-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: var(--gold-ochre);
+  border-style: solid;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.card-ornament-corner.top-left {
+  top: 10px;
+  left: 10px;
+  border-width: 2px 0 0 2px;
+}
+
+.card-ornament-corner.top-right {
+  top: 10px;
+  right: 10px;
+  border-width: 2px 2px 0 0;
+}
+
+.card-ornament-corner.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  border-width: 0 0 2px 2px;
+}
+
+.card-ornament-corner.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  border-width: 0 2px 2px 0;
+}
+
+.countdown-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 16px;
+  background: rgba(197, 155, 60, 0.08);
+  border: 1px solid rgba(197, 155, 60, 0.28);
+  border-radius: 30px;
+  margin-bottom: 12px;
+}
+
+.badge-sparkle {
+  font-size: 0.65rem;
+  color: var(--gold-ochre);
 }
 
 .countdown-eyebrow {
   font-family: var(--font-title);
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--gold-ochre-dark);
   font-weight: 700;
@@ -1949,122 +2176,269 @@ a {
 .countdown-headline {
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-  margin: 6px 0;
+  margin: 4px 0 6px;
   color: var(--sage-deep);
+}
+
+.gold-filigree-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 8px auto 14px;
+  max-width: 220px;
+  color: var(--gold-ochre);
+  font-size: 0.85rem;
+}
+
+.gold-filigree-divider .filigree-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-ochre), transparent);
 }
 
 .countdown-target {
   font-size: 0.95rem;
   color: var(--ink-secondary);
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+  font-family: var(--font-serif);
 }
 
 .countdown-units-flex {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(10px, 3vw, 24px);
+  gap: clamp(8px, 2.5vw, 22px);
 }
 
 .time-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
+}
+
+.time-digit-wrapper {
+  position: relative;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF6EE 55%, #F4ECE0 100%);
+  border: 1.5px solid rgba(197, 155, 60, 0.45);
+  border-radius: 12px;
+  padding: 6px 12px;
+  box-shadow: 
+    0 8px 24px rgba(37, 57, 43, 0.06),
+    inset 0 1px 0 #FFFFFF,
+    inset 0 -1px 2px rgba(197, 155, 60, 0.15);
+  overflow: hidden;
+  min-width: clamp(58px, 13vw, 92px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-digit-wrapper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 155, 60, 0.25), transparent);
+  z-index: 3;
+  pointer-events: none;
 }
 
 .time-digit {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.8vw, 3rem);
   color: var(--gold-ochre-dark);
+  letter-spacing: -0.01em;
+}
+
+.digit-wheel {
+  display: inline-block;
+  height: 1.15em;
+  line-height: 1.15em;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  width: 0.6em;
+  text-align: center;
+}
+
+.digit-strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.digit-num {
+  height: 1.15em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
 }
 
 .time-label {
   font-family: var(--font-title);
-  font-size: 0.65rem;
+  font-size: clamp(0.6rem, 1.4vw, 0.7rem);
   letter-spacing: 0.18em;
   color: var(--sage-deep);
   font-weight: 700;
-  margin-top: 6px;
 }
 
 .time-sep {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  color: var(--gold-ochre);
-  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 100%;
+  padding-bottom: 22px;
+}
+
+.sep-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold-ochre);
+  box-shadow: 0 0 6px rgba(197, 155, 60, 0.5);
+  animation: sepPulse 2s ease-in-out infinite;
+}
+
+.sep-dot:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+@keyframes sepPulse {
+  0%, 100% { opacity: 0.45; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
 }
 
 .wishes-card {
-  width: min(92vw, 540px);
-  padding: 35px 28px;
+  width: min(92vw, 560px);
+  padding: 38px 30px;
   background: #FFFFFF;
-  border-radius: 16px;
-  border: 1.5px solid var(--gold-ochre);
+  border-radius: 20px;
+  border: 1px solid rgba(197, 155, 60, 0.45);
   color: var(--ink-primary);
   text-align: center;
-  box-shadow: 0 16px 45px rgba(37, 57, 43, 0.08);
-  margin-bottom: 60px;
+  box-shadow: 
+    0 20px 50px rgba(37, 57, 43, 0.08),
+    inset 0 0 0 4px rgba(250, 245, 236, 0.9),
+    inset 0 0 0 5px rgba(197, 155, 60, 0.25);
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.wishes-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px;
+  background: rgba(197, 155, 60, 0.08);
+  border: 1px solid rgba(197, 155, 60, 0.28);
+  border-radius: 30px;
+  margin-bottom: 12px;
+}
+
+.wishes-feather-icon {
+  font-size: 0.8rem;
+  color: var(--gold-ochre);
+}
+
+.wishes-eyebrow {
+  font-family: var(--font-title);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ochre-dark);
+  font-weight: 700;
 }
 
 .wishes-title {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
   color: var(--sage-deep);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .wishes-sub {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--ink-secondary);
-  margin-bottom: 20px;
+  margin-bottom: 22px;
+  line-height: 1.5;
+  font-family: var(--font-serif);
 }
 
 .simple-wish-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
-.simple-wish-form input,
-.simple-wish-form textarea {
+.form-input-field input,
+.form-input-field textarea {
   width: 100%;
-  padding: 12px 16px;
-  border: 1px solid rgba(71, 98, 81, 0.25);
-  border-radius: 8px;
-  background: var(--canvas-bg);
+  padding: 13px 18px;
+  border: 1px solid rgba(197, 155, 60, 0.35);
+  border-radius: 10px;
+  background: rgba(250, 245, 236, 0.55);
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: 1.02rem;
   color: var(--ink-primary);
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(37, 57, 43, 0.04);
 }
 
-.simple-wish-form input:focus,
-.simple-wish-form textarea:focus {
+.form-input-field input::placeholder,
+.form-input-field textarea::placeholder {
+  color: rgba(71, 98, 81, 0.55);
+  font-style: italic;
+}
+
+.form-input-field input:focus,
+.form-input-field textarea:focus {
   border-color: var(--gold-ochre);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(197, 155, 60, 0.18);
 }
 
 .btn-send-wish {
-  padding: 14px 24px;
-  background: linear-gradient(135deg, var(--sage-deep) 0%, var(--sage-primary) 100%);
-  color: #FFF;
-  border: 1px solid var(--gold-ochre);
+  position: relative;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--sage-deep) 0%, #344d3b 100%);
+  color: #FFFFFF;
+  border: 1.5px solid var(--gold-ochre);
   border-radius: 30px;
   font-family: var(--font-title);
   font-size: 0.8rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 6px;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  margin-top: 4px;
+  box-shadow: 0 8px 20px rgba(37, 57, 43, 0.18);
+  overflow: hidden;
 }
 
 .btn-send-wish:hover {
-  background: var(--sage-primary);
-  transform: scale(1.02);
+  background: linear-gradient(135deg, #1d2d22 0%, var(--sage-deep) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(37, 57, 43, 0.24);
+  border-color: #E5C77A;
+}
+
+.btn-send-wish:active {
+  transform: translateY(1px);
 }
 
 .wish-submitted-msg {
@@ -2090,31 +2464,61 @@ a {
 
 .invitation-footer {
   text-align: center;
-  padding: 30px 20px;
-  border-top: 1px solid rgba(197, 155, 60, 0.25);
-  width: min(90vw, 700px);
+  padding: 40px 20px 20px;
+  width: min(92vw, 700px);
+  position: relative;
 }
 
-.footer-names {
+.footer-filigree-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  color: var(--gold-ochre);
+  font-size: 0.9rem;
+}
+
+.footer-filigree-top .filigree-line {
+  flex: 1;
+  max-width: 140px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-ochre), transparent);
+}
+
+.footer-best-wishes {
+  margin: 10px 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer-best-wishes .wishes-label {
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-ochre-dark);
+  font-weight: 700;
+}
+
+.footer-best-wishes .wishes-person {
   font-family: var(--font-script);
-  font-size: 2.8rem;
+  font-size: clamp(2.4rem, 5vw, 3rem);
   color: var(--sage-deep);
-  line-height: 1;
-}
-
-.footer-tagline {
-  font-size: 0.95rem;
-  color: var(--ink-secondary);
-  margin: 6px 0 4px;
+  line-height: 1.1;
+  text-shadow: 0 1px 2px rgba(197, 155, 60, 0.15);
 }
 
 .footer-date {
   font-family: var(--font-title);
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold-ochre-dark);
   font-weight: 700;
+  margin-top: 6px;
 }
 
 /* RESPONSIVE DESIGN */
@@ -2220,7 +2624,13 @@ a {
   .unveil-ornament-divider { width: min(80vw, 280px); }
 
   .rings-arena {
-    height: 300px;
+    height: clamp(280px, 40vh, 380px);
+    max-width: 100%;
+  }
+
+  .ring-entity {
+    width: clamp(150px, 30vw, 240px);
+    height: clamp(130px, 26vw, 210px);
   }
 }
 
@@ -2292,20 +2702,60 @@ a {
 
   .rings-split-layout {
     flex-direction: column;
-    gap: 24px;
+    gap: 22px;
   }
 
   .rings-left-portrait-wrap {
     flex: 0 0 auto;
-    width: min(280px, 80vw);
+    width: min(360px, 88vw);
+  }
+
+  .rings-couple-portrait-img {
+    max-height: 46vh;
   }
 
   .rings-right-content-wrap {
     width: 100%;
   }
 
+  .rings-arena {
+    height: clamp(220px, 34vh, 300px);
+  }
+
+  .ring-entity {
+    width: clamp(130px, 38vw, 200px);
+    height: clamp(115px, 33vw, 175px);
+  }
+
+  /* Keep the ∞ ribbon on-screen in the narrower stacked layout */
+  .ring-infinity-svg {
+    inset: -3%;
+    width: 106%;
+    height: 106%;
+  }
+
   .rings-union-section {
-    height: 160vh;
+    height: 210vh;
+  }
+
+  .grand-closing-section {
+    padding: 70px 14px 40px;
+  }
+
+  .countdown-grand-card {
+    padding: 32px 14px;
+    border-radius: 16px;
+  }
+
+  .time-digit-wrapper {
+    padding: 5px 8px;
+    min-width: 54px;
+    border-radius: 9px;
+  }
+
+  .wishes-card {
+    padding: 30px 16px;
+    border-radius: 16px;
   }
 }
 
