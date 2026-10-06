@@ -1107,21 +1107,58 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ═══════════════════════════════════════════════════════════
-     8. WISHES / RSVP FORM SUBMISSION
+     8. WISHES / RSVP GOOGLE SHEET SUBMISSION
      ═══════════════════════════════════════════════════════════ */
+  const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby1mxOUrq4KorMIvoruZ8FO4uB5HzL2aSa3vP0H_20vRGu-j9xP17Evbyw7I4OLVrmazA/exec';
+
   const wishForm   = $('#wishForm');
   const wishThanks = $('#wishThanks');
+  const btnSendWish = wishForm ? wishForm.querySelector('.btn-send-wish') : null;
 
   if (wishForm) {
-    wishForm.addEventListener('submit', (e) => {
+    wishForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const guestName = $('#guestNameInput').value;
-      const guestMsg  = $('#guestMsgInput').value;
+      const nameInput = $('#guestNameInput');
+      const msgInput  = $('#guestMsgInput');
 
-      console.log('Guest wish received:', { guestName, guestMsg });
+      const guestName = (nameInput ? nameInput.value : '').trim();
+      const guestMsg  = (msgInput  ? msgInput.value  : '').trim();
+
+      if (!guestName || !guestMsg) return;
+
+      const payload = {
+        timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        name: guestName,
+        message: guestMsg,
+        party: currentRoute ? currentRoute.party : 'bride',
+        group: currentRoute ? currentRoute.group : 'family',
+        url: window.location.href
+      };
+
+      console.log('Sending wish to Google Sheet:', payload);
+
+      if (btnSendWish) {
+        btnSendWish.disabled = true;
+        btnSendWish.innerHTML = '<span class="btn-text">Sending Dua... ✧</span>';
+      }
+
+      if (GOOGLE_SHEET_WEB_APP_URL) {
+        try {
+          await fetch(GOOGLE_SHEET_WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          console.warn('Google Sheet submission notice:', err);
+        }
+      }
 
       wishForm.style.display = 'none';
-      wishThanks.hidden = false;
+      if (wishThanks) wishThanks.hidden = false;
       celebrateScratchReveal();
     });
   }
