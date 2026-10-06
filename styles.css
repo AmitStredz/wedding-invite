@@ -448,14 +448,16 @@ a {
 /* Grand Bespoke Card Canvas — Fills the Viewport Elegantly & Perfectly Centered */
 .bespoke-card-canvas {
   position: relative;
-  width: min(96vw, 1540px);
+  /* 100% (not 96vw) so the hero's own horizontal padding is respected and the
+     card never overflows / gets clipped on the right. */
+  width: min(100%, 1540px);
   max-width: 1540px;
   height: calc(100vh - clamp(20px, 3.5vh, 44px));
   min-height: clamp(580px, 88vh, 840px);
   display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: clamp(16px, 2.5vw, 44px);
-  padding: clamp(10px, 1.5vh, 24px) clamp(20px, 3vw, 44px);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(8px, 1.2vw, 20px);
+  padding: clamp(10px, 1.5vh, 24px) clamp(16px, 2.2vw, 34px);
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -491,6 +493,7 @@ a {
   position: relative;
   width: 100%;
   height: 100%;
+  min-width: 0;
 }
 
 .watercolor-portrait-wrapper {
@@ -637,6 +640,7 @@ a {
   text-align: center;
   color: var(--ink-primary);
   height: 100%;
+  min-width: 0;
   padding: 6px 0;
 }
 
