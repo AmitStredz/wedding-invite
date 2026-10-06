@@ -448,12 +448,12 @@ a {
 /* Grand Bespoke Card Canvas — Fills the Viewport Elegantly & Perfectly Centered */
 .bespoke-card-canvas {
   position: relative;
-  width: min(96vw, 1480px);
-  max-width: 1480px;
+  width: min(96vw, 1540px);
+  max-width: 1540px;
   height: calc(100vh - clamp(20px, 3.5vh, 44px));
   min-height: clamp(580px, 88vh, 840px);
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1.35fr 1fr;
   gap: clamp(16px, 2.5vw, 44px);
   padding: clamp(10px, 1.5vh, 24px) clamp(20px, 3vw, 44px);
   align-items: center;
@@ -491,7 +491,6 @@ a {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 
 .watercolor-portrait-wrapper {
@@ -536,27 +535,41 @@ a {
 }
 
 .watercolor-couple-img {
-  width: 100%;
+  /* FIX: Let the width adjust naturally to match the portrait aspect ratio */
+  width: auto;
   height: 100%;
-  max-height: clamp(540px, 88vh, 840px);
-  object-fit: contain;
+  max-height: clamp(560px, 92vh, 880px);
+  
+  /* Remove object-fit: contain; as it is no longer needed */
   object-position: center;
   mix-blend-mode: multiply;
   filter: contrast(105%) saturate(108%) brightness(99%);
-  transform: scale(1.06);
+  transform: scale(1.02);
   transition: transform 5s ease;
-  -webkit-mask-image: radial-gradient(ellipse 96% 96% at 50% 50%, black 82%, rgba(0,0,0,0.6) 94%, transparent 100%);
-  mask-image: radial-gradient(ellipse 96% 96% at 50% 50%, black 82%, rgba(0,0,0,0.6) 94%, transparent 100%);
+
+  /* 1. Shave off the sharp physical corners of the image */
+  border-radius: 24px; 
+
+  /* 2. Increased to 40px for a deeper, aggressive fade to melt the watercolor edges */
+  mask-image: 
+    linear-gradient(to bottom, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%),
+    linear-gradient(to right, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
+  
+  /* 3. Force the masks to intersect, completely dissolving the corners */
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in; 
 }
 
+
+
 .watercolor-portrait-wrapper:hover .watercolor-couple-img {
-  transform: scale(1.09);
+  transform: scale(1.04);
 }
 
 .watercolor-blend-glow {
   position: absolute;
-  inset: -25px;
-  background: radial-gradient(ellipse 95% 95% at 50% 50%, rgba(250, 245, 236, 0) 78%, rgba(250, 245, 236, 0.45) 94%, var(--canvas-bg) 100%);
+  inset: -10px;
+  background: radial-gradient(ellipse 96% 96% at 50% 50%, transparent 78%, var(--canvas-bg) 100%);
   pointer-events: none;
 }
 
