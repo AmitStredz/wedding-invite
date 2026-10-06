@@ -796,6 +796,133 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ═══════════════════════════════════════════════════════════
+     7. CUSTOM ROUTING & DYNAMIC GALLERY (Family / Friends)
+     ═══════════════════════════════════════════════════════════ */
+  const GALLERY_COLLECTIONS = {
+    // Friends: 1, 2, 3, 4, 5, 6, 7, 8
+    friends: [
+      { src: 'assets/card-images/1.jpeg', alt: 'Cherished Moment 1' },
+      { src: 'assets/card-images/2.jpeg', alt: 'Cherished Moment 2' },
+      { src: 'assets/card-images/3.jpeg', alt: 'Cherished Moment 3' },
+      { src: 'assets/card-images/4.jpeg', alt: 'Cherished Moment 4' },
+      { src: 'assets/card-images/5.jpeg', alt: 'Cherished Moment 5' },
+      { src: 'assets/card-images/6.jpeg', alt: 'Cherished Moment 6' },
+      { src: 'assets/card-images/7.jpeg', alt: 'Cherished Moment 7' },
+      { src: 'assets/card-images/8.jpeg', alt: 'Cherished Moment 8' }
+    ],
+    // Family: 2, 3, 9, 10, 11
+    family: [
+      { src: 'assets/card-images/2.jpeg',  alt: 'Family Moment 1' },
+      { src: 'assets/card-images/9.png',   alt: 'Family Moment 3' },
+      { src: 'assets/card-images/10.png',  alt: 'Family Moment 4' },
+      { src: 'assets/card-images/3.jpeg',  alt: 'Family Moment 2' },
+      { src: 'assets/card-images/11.png',  alt: 'Family Moment 5' }
+    ]
+  };
+
+  const ROTATION_PATTERNS = [
+    'rotate-neg-1',
+    'rotate-pos-2',
+    'rotate-neg-2',
+    'rotate-pos-1',
+    'rotate-neg-3',
+    'rotate-pos-3'
+  ];
+
+  function determineAudienceGroup() {
+    const rawUrl = window.location.href;
+    const search = window.location.search || '';
+    const hash = window.location.hash || '';
+
+    let token = '';
+
+    try {
+      const params = new URLSearchParams(search);
+      const keys = ['v', 'code', 'access', 'group', 'type', 'tag', 'p', 'view', 'id', 'ref'];
+      for (const k of keys) {
+        if (params.has(k)) {
+          token = params.get(k) || '';
+          break;
+        }
+      }
+      if (!token) {
+        for (const k of params.keys()) {
+          if (k && !params.get(k)) {
+            token = k;
+            break;
+          }
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    if (!token && hash) {
+      token = hash.replace(/^#/, '');
+    }
+
+    token = (token || '').toLowerCase().trim();
+
+    // Map secret tokens:
+    // Friends Secret Tokens: e.g. "wruh@3%k", "wruh@3k", "wruh3k"
+    if (
+      token.includes('wruh') ||
+      token === 'friends' ||
+      token === 'friend' ||
+      /wruh[@%3k]+/i.test(rawUrl)
+    ) {
+      return 'friends';
+    }
+
+    // Family Secret Tokens: e.g. "k9x@7%m", "f7m@9%x", "k9x@7m", "fam", "family"
+    if (
+      token.includes('k9x') ||
+      token.includes('f7m') ||
+      token === 'family' ||
+      token === 'fam' ||
+      /k9x[@%7m]+/i.test(rawUrl) ||
+      /f7m[@%9x]+/i.test(rawUrl) ||
+      /family/i.test(rawUrl)
+    ) {
+      return 'family';
+    }
+
+    // Default fallback to family
+    return 'family';
+  }
+
+  function initDynamicGallery() {
+    const track = $('.hanging-wire-track');
+    if (!track) return;
+
+    const groupKey = determineAudienceGroup();
+    const images = GALLERY_COLLECTIONS[groupKey] || GALLERY_COLLECTIONS.family;
+
+    // Ensure adequate items per half for infinite loop
+    let items = [...images];
+    while (items.length < 8) {
+      items = items.concat(images);
+    }
+
+    // Duplicate once to form exact 2 halves for seamless loop (0% -> -50%)
+    const fullTrackItems = [...items, ...items];
+
+    track.innerHTML = fullTrackItems.map((item, idx) => {
+      const rot = ROTATION_PATTERNS[idx % ROTATION_PATTERNS.length];
+      return `
+        <div class="wire-photo-card ${rot}">
+          <div class="photo-hanging-clip"></div>
+          <div class="wire-photo-frame">
+            <img src="${item.src}" alt="${item.alt}" loading="lazy" />
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  initDynamicGallery();
+
+  /* ═══════════════════════════════════════════════════════════
      8. WISHES / RSVP FORM SUBMISSION
      ═══════════════════════════════════════════════════════════ */
   const wishForm   = $('#wishForm');
