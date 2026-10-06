@@ -684,10 +684,250 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ═══════════════════════════════════════════════════════════
-     5. LIVE COUNTDOWN TIMER (Target: 29 Nov 2026, 12:00 PM IST)
-        With Smooth Mechanical Rolling Number Reels
+     5. DYNAMIC PARTY & ROUTING CONFIGURATION
+        (Bride vs Groom Party & Family vs Friends Lists)
      ═══════════════════════════════════════════════════════════ */
-  const weddingEpoch = new Date('2026-11-29T12:00:00+05:30').getTime();
+  const PARTY_CONFIG = {
+    bride: {
+      reception: {
+        badge: 'THE RECEPTION',
+        date: 'Saturday, 28 Nov 2026',
+        time: '5:00 PM Onwards',
+        hijri: '',
+        loc: 'Sneha Auditorium, Thevalakara',
+        note: 'An evening of joyful blessings, family togetherness, and grand dinner.'
+      },
+      venueFooter: {
+        title: 'Sneha Auditorium',
+        address: 'Kadappayil Jn., Thevalakara, Kollam, Kerala',
+        mapsUrl: 'https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara'
+      },
+      bestWishes: {
+        label: 'With Best Wishes :',
+        name: 'Farhana Ibrahim'
+      },
+      countdown: {
+        targetEpoch: new Date('2026-11-29T12:00:00+05:30').getTime(),
+        targetText: 'Sunday, 29 November 2026 · Sneha Auditorium, Thevalakara'
+      },
+      footerDate: '28 & 29 November 2026 · Thevalakara, Kollam'
+    },
+    groom: {
+      reception: {
+        badge: 'THE RECEPTION',
+        date: 'Monday, 30 Nov 2026',
+        time: '11:30 AM TO 2:00 PM',
+        hijri: '(Jamaat-ul-Akhir 20, 1448)',
+        loc: 'Shakthi Auditorium, Alappuzha',
+        note: 'The grand wedding reception celebration and feast in honour of the newlyweds.'
+      },
+      venueFooter: {
+        title: 'Shakthi Auditorium',
+        address: 'Alappuzha, Kerala',
+        mapsUrl: 'https://maps.google.com/?q=Shakthi+Auditorium+Alappuzha'
+      },
+      bestWishes: {
+        label: 'Sharing happiness :',
+        name: 'ADI J'
+      },
+      countdown: {
+        targetEpoch: new Date('2026-11-30T11:30:00+05:30').getTime(),
+        targetText: 'Monday, 30 November 2026 · Shakthi Auditorium, Alappuzha'
+      },
+      footerDate: '29 & 30 November 2026 · Alappuzha'
+    }
+  };
+
+  const GALLERY_COLLECTIONS = {
+    // Friends: 1, 2, 3, 4, 5, 6, 7, 8
+    friends: [
+      { src: 'assets/card-images/1.jpeg', alt: 'Cherished Moment 1' },
+      { src: 'assets/card-images/2.jpeg', alt: 'Cherished Moment 2' },
+      { src: 'assets/card-images/9.png',   alt: 'Family Moment 3' },
+      { src: 'assets/card-images/4.jpeg', alt: 'Cherished Moment 4' },
+      { src: 'assets/card-images/5.jpeg', alt: 'Cherished Moment 5' },
+      { src: 'assets/card-images/3.jpeg', alt: 'Cherished Moment 3' },
+      { src: 'assets/card-images/6.jpeg', alt: 'Cherished Moment 6' },
+      { src: 'assets/card-images/10.png',  alt: 'Family Moment 4' },
+      { src: 'assets/card-images/7.jpeg', alt: 'Cherished Moment 7' },
+      { src: 'assets/card-images/8.jpeg', alt: 'Cherished Moment 8' },
+      { src: 'assets/card-images/11.png',  alt: 'Family Moment 5' }
+    ],
+    // Family: 2, 3, 9, 10, 11
+    family: [
+      { src: 'assets/card-images/2.jpeg',  alt: 'Family Moment 1' },
+      { src: 'assets/card-images/9.png',   alt: 'Family Moment 3' },
+      { src: 'assets/card-images/10.png',  alt: 'Family Moment 4' },
+      { src: 'assets/card-images/3.jpeg',  alt: 'Family Moment 2' },
+      { src: 'assets/card-images/11.png',  alt: 'Family Moment 5' }
+    ]
+  };
+
+  const ROTATION_PATTERNS = [
+    'rotate-neg-1',
+    'rotate-pos-2',
+    'rotate-neg-2',
+    'rotate-pos-1',
+    'rotate-neg-3',
+    'rotate-pos-3'
+  ];
+
+  function resolveInvitationRoute() {
+    const rawUrl = window.location.href;
+    const search = window.location.search || '';
+    const hash = window.location.hash || '';
+
+    let tokens = [];
+    try {
+      const params = new URLSearchParams(search);
+      for (const [k, v] of params.entries()) {
+        if (k) tokens.push(k);
+        if (v) tokens.push(v);
+      }
+    } catch (e) {}
+
+    if (hash) {
+      tokens.push(hash.replace(/^#/, ''));
+    }
+
+    const tokenBlob = (tokens.join(' ') + ' ' + rawUrl).toLowerCase();
+
+    // 1. Secret Obfuscated Tokens:
+    // Groom Friends: "q9v@6%r"
+    if (tokenBlob.includes('q9v') || /q9v[@%6r]+/i.test(tokenBlob)) {
+      return { party: 'groom', group: 'friends' };
+    }
+
+    // Groom Family: "g8m@4%z"
+    if (tokenBlob.includes('g8m') || /g8m[@%4z]+/i.test(tokenBlob)) {
+      return { party: 'groom', group: 'family' };
+    }
+
+    // Bride Friends: "wruh@3%k"
+    if (tokenBlob.includes('wruh') || /wruh[@%3k]+/i.test(tokenBlob)) {
+      return { party: 'bride', group: 'friends' };
+    }
+
+    // Bride Family: "k9x@7%m" or "f7m@9%x"
+    if (tokenBlob.includes('k9x') || tokenBlob.includes('f7m') || /k9x[@%7m]+/i.test(tokenBlob)) {
+      return { party: 'bride', group: 'family' };
+    }
+
+    // 2. Readable Semantic URLs:
+    let party = 'bride';
+    let group = 'family';
+
+    if (tokenBlob.includes('groom') || tokenBlob.includes('side=groom') || tokenBlob.includes('party=groom')) {
+      party = 'groom';
+    } else if (tokenBlob.includes('bride') || tokenBlob.includes('side=bride') || tokenBlob.includes('party=bride')) {
+      party = 'bride';
+    }
+
+    if (tokenBlob.includes('friends') || tokenBlob.includes('friend') || tokenBlob.includes('type=friends') || tokenBlob.includes('group=friends')) {
+      group = 'friends';
+    } else if (tokenBlob.includes('family') || tokenBlob.includes('fam') || tokenBlob.includes('type=family') || tokenBlob.includes('group=family')) {
+      group = 'family';
+    }
+
+    return { party, group };
+  }
+
+  let activeCountdownEpoch = PARTY_CONFIG.bride.countdown.targetEpoch;
+
+  function applyPartyDetails(partyKey) {
+    const config = PARTY_CONFIG[partyKey] || PARTY_CONFIG.bride;
+
+    // Reception Wing Card
+    const badgeEl = $('#receptionBadge');
+    const dateEl  = $('#receptionDate');
+    const timeEl  = $('#receptionTime');
+    const hijriEl = $('#receptionHijri');
+    const locEl   = $('#receptionLoc');
+    const noteEl  = $('#receptionNote');
+
+    if (badgeEl) badgeEl.textContent = config.reception.badge;
+    if (dateEl)  dateEl.textContent  = config.reception.date;
+    if (timeEl)  timeEl.textContent  = config.reception.time;
+    if (locEl)   locEl.textContent   = config.reception.loc;
+    if (noteEl)  noteEl.textContent  = config.reception.note;
+
+    if (hijriEl) {
+      if (config.reception.hijri) {
+        hijriEl.textContent = config.reception.hijri;
+        hijriEl.style.display = 'block';
+      } else {
+        hijriEl.textContent = '';
+        hijriEl.style.display = 'none';
+      }
+    }
+
+    // Venue Footer
+    const vTitle = $('#folioVenueTitle');
+    const vAddr  = $('#folioVenueAddress');
+    const vLink  = $('#folioVenueMapsLink');
+
+    if (vTitle) vTitle.textContent = config.venueFooter.title;
+    if (vAddr)  vAddr.textContent  = config.venueFooter.address;
+    if (vLink)  vLink.href         = config.venueFooter.mapsUrl;
+
+    // Best Wishes (Folio)
+    const bwLabel = $('#folioBestWishesLabel');
+    const bwName  = $('#folioBestWishesName');
+    if (bwLabel) bwLabel.textContent = config.bestWishes.label;
+    if (bwName)  bwName.textContent  = config.bestWishes.name;
+
+    // Countdown target text & Footer
+    const cdTarget = $('#countdownTargetText');
+    if (cdTarget) cdTarget.textContent = config.countdown.targetText;
+
+    const ftLabel  = $('#footerWishesLabel');
+    const ftPerson = $('#footerWishesPerson');
+    const ftDate   = $('#footerDateText');
+
+    if (ftLabel)  ftLabel.textContent  = config.bestWishes.label;
+    if (ftPerson) ftPerson.textContent = config.bestWishes.name;
+    if (ftDate)   ftDate.textContent   = config.footerDate;
+
+    // Active countdown target epoch
+    activeCountdownEpoch = config.countdown.targetEpoch;
+  }
+
+  function initDynamicGallery(groupKey) {
+    const track = $('.hanging-wire-track');
+    if (!track) return;
+
+    const images = GALLERY_COLLECTIONS[groupKey] || GALLERY_COLLECTIONS.family;
+
+    // Ensure adequate items per half for infinite loop
+    let items = [...images];
+    while (items.length < 8) {
+      items = items.concat(images);
+    }
+
+    // Duplicate once to form exact 2 halves for seamless loop (0% -> -50%)
+    const fullTrackItems = [...items, ...items];
+
+    track.innerHTML = fullTrackItems.map((item, idx) => {
+      const rot = ROTATION_PATTERNS[idx % ROTATION_PATTERNS.length];
+      return `
+        <div class="wire-photo-card ${rot}">
+          <div class="photo-hanging-clip"></div>
+          <div class="wire-photo-frame">
+            <img src="${item.src}" alt="${item.alt}" loading="lazy" />
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Initialize Routing & Dynamic Content
+  const currentRoute = resolveInvitationRoute();
+  applyPartyDetails(currentRoute.party);
+  initDynamicGallery(currentRoute.group);
+
+  /* ═══════════════════════════════════════════════════════════
+     6. LIVE COUNTDOWN TIMER (Mechanical Rolling Reels)
+     ═══════════════════════════════════════════════════════════ */
   const digitDays    = $('[data-unit="days"]');
   const digitHours   = $('[data-unit="hours"]');
   const digitMinutes = $('[data-unit="minutes"]');
@@ -729,7 +969,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateGrandTimer() {
     const now = Date.now();
-    const diff = Math.max(0, weddingEpoch - now);
+    const diff = Math.max(0, activeCountdownEpoch - now);
 
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -746,7 +986,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateGrandTimer, 1000);
 
   /* ═══════════════════════════════════════════════════════════
-     6. AMBIENT PARTICLES (GOLD DUST DRIFT)
+     7. AMBIENT PARTICLES (GOLD DUST DRIFT)
      ═══════════════════════════════════════════════════════════ */
   const ambCanvas = $('#ambientCanvas');
   if (ambCanvas) {
@@ -793,137 +1033,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     renderAmbParticles();
   }
-
-
-  /* ═══════════════════════════════════════════════════════════
-     7. CUSTOM ROUTING & DYNAMIC GALLERY (Family / Friends)
-     ═══════════════════════════════════════════════════════════ */
-  const GALLERY_COLLECTIONS = {
-    // Friends: 1, 2, 3, 4, 5, 6, 7, 8
-    friends: [
-      { src: 'assets/card-images/1.jpeg', alt: 'Cherished Moment 1' },
-      { src: 'assets/card-images/2.jpeg', alt: 'Cherished Moment 2' },
-      { src: 'assets/card-images/9.png',   alt: 'Family Moment 3' },
-      { src: 'assets/card-images/4.jpeg', alt: 'Cherished Moment 4' },
-      { src: 'assets/card-images/5.jpeg', alt: 'Cherished Moment 5' },
-      { src: 'assets/card-images/3.jpeg', alt: 'Cherished Moment 3' },
-      { src: 'assets/card-images/6.jpeg', alt: 'Cherished Moment 6' },
-      { src: 'assets/card-images/10.png',  alt: 'Family Moment 4' },
-      { src: 'assets/card-images/7.jpeg', alt: 'Cherished Moment 7' },
-      { src: 'assets/card-images/8.jpeg', alt: 'Cherished Moment 8' },
-      { src: 'assets/card-images/11.png',  alt: 'Family Moment 5' }
-    ],
-    // Family: 2, 3, 9, 10, 11
-    family: [
-      { src: 'assets/card-images/2.jpeg',  alt: 'Family Moment 1' },
-      { src: 'assets/card-images/9.png',   alt: 'Family Moment 3' },
-      { src: 'assets/card-images/10.png',  alt: 'Family Moment 4' },
-      { src: 'assets/card-images/3.jpeg',  alt: 'Family Moment 2' },
-      { src: 'assets/card-images/11.png',  alt: 'Family Moment 5' }
-    ]
-  };
-
-  const ROTATION_PATTERNS = [
-    'rotate-neg-1',
-    'rotate-pos-2',
-    'rotate-neg-2',
-    'rotate-pos-1',
-    'rotate-neg-3',
-    'rotate-pos-3'
-  ];
-
-  function determineAudienceGroup() {
-    const rawUrl = window.location.href;
-    const search = window.location.search || '';
-    const hash = window.location.hash || '';
-
-    let token = '';
-
-    try {
-      const params = new URLSearchParams(search);
-      const keys = ['v', 'code', 'access', 'group', 'type', 'tag', 'p', 'view', 'id', 'ref'];
-      for (const k of keys) {
-        if (params.has(k)) {
-          token = params.get(k) || '';
-          break;
-        }
-      }
-      if (!token) {
-        for (const k of params.keys()) {
-          if (k && !params.get(k)) {
-            token = k;
-            break;
-          }
-        }
-      }
-    } catch (e) {
-      // ignore
-    }
-
-    if (!token && hash) {
-      token = hash.replace(/^#/, '');
-    }
-
-    token = (token || '').toLowerCase().trim();
-
-    // Map secret tokens:
-    // Friends Secret Tokens: e.g. "wruh@3%k", "wruh@3k", "wruh3k"
-    if (
-      token.includes('wruh') ||
-      token === 'friends' ||
-      token === 'friend' ||
-      /wruh[@%3k]+/i.test(rawUrl)
-    ) {
-      return 'friends';
-    }
-
-    // Family Secret Tokens: e.g. "k9x@7%m", "f7m@9%x", "k9x@7m", "fam", "family"
-    if (
-      token.includes('k9x') ||
-      token.includes('f7m') ||
-      token === 'family' ||
-      token === 'fam' ||
-      /k9x[@%7m]+/i.test(rawUrl) ||
-      /f7m[@%9x]+/i.test(rawUrl) ||
-      /family/i.test(rawUrl)
-    ) {
-      return 'family';
-    }
-
-    // Default fallback to family
-    return 'family';
-  }
-
-  function initDynamicGallery() {
-    const track = $('.hanging-wire-track');
-    if (!track) return;
-
-    const groupKey = determineAudienceGroup();
-    const images = GALLERY_COLLECTIONS[groupKey] || GALLERY_COLLECTIONS.family;
-
-    // Ensure adequate items per half for infinite loop
-    let items = [...images];
-    while (items.length < 8) {
-      items = items.concat(images);
-    }
-
-    // Duplicate once to form exact 2 halves for seamless loop (0% -> -50%)
-    const fullTrackItems = [...items, ...items];
-
-    track.innerHTML = fullTrackItems.map((item, idx) => {
-      const rot = ROTATION_PATTERNS[idx % ROTATION_PATTERNS.length];
-      return `
-        <div class="wire-photo-card ${rot}">
-          <div class="photo-hanging-clip"></div>
-          <div class="wire-photo-frame">
-            <img src="${item.src}" alt="${item.alt}" loading="lazy" />
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  initDynamicGallery();
 
   /* ═══════════════════════════════════════════════════════════
      8. WISHES / RSVP FORM SUBMISSION

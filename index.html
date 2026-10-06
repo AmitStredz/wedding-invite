@@ -281,13 +281,14 @@
             <div class="folio-ceremonies-wings">
               
               <!-- Left Wing: Reception -->
-              <div class="ceremony-wing-card ceremony-wing-card--reception">
-                <div class="wing-icon-badge">✨</div>
-                <span class="wing-badge">THE RECEPTION</span>
-                <h3 class="wing-date">Saturday, 28 Nov 2026</h3>
-                <div class="wing-time">5:00 PM Onwards</div>
-                <div class="wing-loc">Sneha Auditorium, Thevalakara</div>
-                <p class="wing-note">An evening of joyful blessings, family togetherness, and grand dinner.</p>
+              <div class="ceremony-wing-card ceremony-wing-card--reception" id="receptionWingCard">
+                <div class="wing-icon-badge" id="receptionIconBadge">✨</div>
+                <span class="wing-badge" id="receptionBadge">THE RECEPTION</span>
+                <h3 class="wing-date" id="receptionDate">Saturday, 28 Nov 2026</h3>
+                <div class="wing-time" id="receptionTime">5:00 PM Onwards</div>
+                <div class="wing-hijri" id="receptionHijri" style="display: none;"></div>
+                <div class="wing-loc" id="receptionLoc">Sneha Auditorium, Thevalakara</div>
+                <p class="wing-note" id="receptionNote">An evening of joyful blessings, family togetherness, and grand dinner.</p>
               </div>
 
               <!-- Center Floral Crest Divider -->
@@ -315,11 +316,11 @@
               <div class="venue-info-inline">
                 <span class="venue-pin-icon">🏛</span>
                 <div class="venue-inline-text">
-                  <strong>Sneha Auditorium</strong>
-                  <span>Kadappayil Jn., Thevalakara, Kollam, Kerala</span>
+                  <strong id="folioVenueTitle">Sneha Auditorium</strong>
+                  <span id="folioVenueAddress">Kadappayil Jn., Thevalakara, Kollam, Kerala</span>
                 </div>
               </div>
-              <a href="https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara" target="_blank" rel="noopener" class="btn-folio-directions">
+              <a href="https://maps.google.com/?q=Sneha+Auditorium+Kadappayil+Jn+Thevalakara" target="_blank" rel="noopener" class="btn-folio-directions" id="folioVenueMapsLink">
                 <span>Open in Google Maps</span>
                 <i>↗</i>
               </a>
@@ -327,8 +328,8 @@
 
             <!-- Best Wishes Signature from Card -->
             <div class="folio-best-wishes-bar">
-              <span class="best-wishes-label">With Best Wishes :</span>
-              <span class="best-wishes-name">Farhana Ibrahim</span>
+              <span class="best-wishes-label" id="folioBestWishesLabel">With Best Wishes :</span>
+              <span class="best-wishes-name" id="folioBestWishesName">Farhana Ibrahim</span>
             </div>
 
           </div>
@@ -638,7 +639,7 @@
           <span class="filigree-line"></span>
         </div>
 
-        <p class="countdown-target">Sunday, 29 November 2026 · Sneha Auditorium, Thevalakara</p>
+        <p class="countdown-target" id="countdownTargetText">Sunday, 29 November 2026 · Sneha Auditorium, Thevalakara</p>
 
         <!-- Mechanical Smooth Rolling Countdown Units -->
         <div class="countdown-units-flex" id="grandTimer">
@@ -729,10 +730,10 @@
           <span class="filigree-line"></span>
         </div>
         <div class="footer-best-wishes">
-          <span class="wishes-label">With Best Wishes :</span>
-          <span class="wishes-person">Farhana Ibrahim</span>
+          <span class="wishes-label" id="footerWishesLabel">With Best Wishes :</span>
+          <span class="wishes-person" id="footerWishesPerson">Farhana Ibrahim</span>
         </div>
-        <div class="footer-date">28 &amp; 29 November 2026 · Thevalakara, Kollam</div>
+        <div class="footer-date" id="footerDateText">28 &amp; 29 November 2026 · Thevalakara, Kollam</div>
       </footer>
 
     </section>
