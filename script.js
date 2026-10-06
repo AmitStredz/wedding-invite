@@ -59,6 +59,23 @@ document.addEventListener('DOMContentLoaded', () => {
   let hasRevealed = false;
   let totalPixels = 0;
 
+  /* Classic 8-point Islamic Khatim star: a square overlapped by a 45° square */
+  function drawKhatimStar(ctx, x, y, r) {
+    const d = r * 0.7071;
+    ctx.beginPath();
+    ctx.moveTo(x, y - r);
+    ctx.lineTo(x + r, y);
+    ctx.lineTo(x, y + r);
+    ctx.lineTo(x - r, y);
+    ctx.closePath();
+    ctx.moveTo(x - d, y - d);
+    ctx.lineTo(x + d, y - d);
+    ctx.lineTo(x + d, y + d);
+    ctx.lineTo(x - d, y + d);
+    ctx.closePath();
+    ctx.stroke();
+  }
+
   function initLuxuryScratchCard() {
     if (!scratchCanvas || !scratchHolder) return;
 
@@ -113,6 +130,23 @@ document.addEventListener('DOMContentLoaded', () => {
       scratchCtx.fillStyle = (i % 4 === 0) ? '#FFFFFF' : ((i % 2 === 0) ? '#FFF0C2' : '#8A6214');
       scratchCtx.fillRect(rx, ry, rsize, rsize);
     }
+
+    // 3b. Hand-etched Islamic geometric lattice (8-point Khatim stars)
+    //     Gives the foil an artisanal guilloché finish instead of a blank gold slab.
+    const latticeUnit = w < 640 ? 30 : 38;
+    const latticeStep = latticeUnit * 1.55;
+    scratchCtx.globalAlpha = 0.13;
+    scratchCtx.strokeStyle = '#FFF6D8';
+    scratchCtx.lineWidth = 1;
+    let latticeRow = 0;
+    for (let gy = -latticeStep; gy < h + latticeStep; gy += latticeStep) {
+      const rowOffset = (latticeRow % 2) ? latticeStep / 2 : 0;
+      for (let gx = -latticeStep; gx < w + latticeStep; gx += latticeStep) {
+        drawKhatimStar(scratchCtx, gx + rowOffset, gy, latticeUnit / 2);
+      }
+      latticeRow++;
+    }
+    scratchCtx.globalAlpha = 1;
 
     // 4. Ornate Royal Filigree Borders & Fleurons
     scratchCtx.globalAlpha = 0.9;
@@ -466,36 +500,127 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function celebrateScratchReveal() {
-    const colors = ['#F5DE98', '#E5C77A', '#B32A35', '#FFFDF8', '#8CA394', '#9C721D'];
-    const totalConfetti = 70;
+    // Respect visitors who prefer reduced motion — no particle storm for them.
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    for (let i = 0; i < totalConfetti; i++) {
-      const p = document.createElement('div');
-      const isHeart = i % 4 === 0;
-      p.innerHTML = isHeart ? '❤' : (i % 2 === 0 ? '✦' : '•');
-      p.style.cssText = `
-        position: fixed;
-        left: 50vw;
-        top: 60vh;
-        color: ${colors[Math.floor(Math.random() * colors.length)]};
-        font-size: ${Math.random() * 18 + 12}px;
-        pointer-events: none;
-        z-index: 9999;
-        transition: transform 1.6s cubic-bezier(0.2, 0.8, 0.3, 1), opacity 1.6s ease;
-      `;
-      document.body.appendChild(p);
+    const folio = $('#scratchHolder');
+    if (folio) {
+      folio.classList.add('is-celebrating');
+      setTimeout(() => folio.classList.remove('is-celebrating'), 1800);
+    }
 
-      const angle = Math.random() * Math.PI * 2;
-      const dist = Math.random() * 280 + 80;
-      const tx = Math.cos(angle) * dist;
-      const ty = Math.sin(angle) * dist - 80;
+    bloomGoldHalo(folio);
+    scatterGoldTwinkles(folio);
+    shedRosePetals();
+    raiseGoldMotes(folio);
+  }
 
+  /* A soft champagne halo that blooms outward from the folio and dissolves */
+  function bloomGoldHalo(folio) {
+    if (!folio) return;
+    const r = folio.getBoundingClientRect();
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const glowSize = Math.min(Math.max(r.width, r.height) * 1.5, 1000);
+
+    const glow = document.createElement('div');
+    glow.className = 'unveil-halo';
+    glow.setAttribute('aria-hidden', 'true');
+    glow.style.cssText = `left:${cx}px;top:${cy}px;width:${glowSize}px;height:${glowSize}px;` +
+      `margin-left:${-glowSize / 2}px;margin-top:${-glowSize / 2}px;`;
+
+    document.body.appendChild(glow);
+    setTimeout(() => glow.remove(), 2000);
+  }
+
+  /* Fine gold ✦ twinkles that bloom and dissolve across the revealed folio */
+  function scatterGoldTwinkles(folio) {
+    if (!folio) return;
+    const r = folio.getBoundingClientRect();
+
+    for (let i = 0; i < 16; i++) {
+      const tw = document.createElement('div');
+      tw.className = 'gold-twinkle';
+      tw.setAttribute('aria-hidden', 'true');
+      tw.textContent = '✦';
+      tw.style.cssText =
+        `left:${r.left + 20 + Math.random() * Math.max(10, r.width - 40)}px;` +
+        `top:${r.top + 20 + Math.random() * Math.max(10, r.height - 40)}px;` +
+        `font-size:${(Math.random() * 12 + 9).toFixed(1)}px;` +
+        `--tw-delay:${(Math.random() * 1.2).toFixed(2)}s;`;
+
+      document.body.appendChild(tw);
+      setTimeout(() => tw.remove(), 3000);
+    }
+  }
+
+  /* Dusty-rose, sage and champagne petals that flutter down the screen */
+  function shedRosePetals() {
+    const palette = ['#D9A6AD', '#C98F98', '#B99BB0', '#9DB29F', '#E4D2A4', '#F3E6D2'];
+    const count = window.innerWidth < 640 ? 16 : 26;
+
+    for (let i = 0; i < count; i++) {
+      const fallDur = (Math.random() * 3 + 4.5).toFixed(2);
+      const delay = (Math.random() * 1.6).toFixed(2);
+      const swayDur = (Math.random() * 1.8 + 1.6).toFixed(2);
+      const sway = (Math.random() * 40 + 18).toFixed(0);
+      const scale = Math.random() * 0.6 + 0.55;
+      const color = palette[i % palette.length];
+
+      const outer = document.createElement('div');
+      outer.className = 'petal-fall';
+      outer.setAttribute('aria-hidden', 'true');
+      outer.style.cssText = `position:fixed;top:0;left:${(Math.random() * 100).toFixed(2)}vw;z-index:9997;` +
+        `pointer-events:none;--fall-dur:${fallDur}s;--fall-delay:${delay}s;` +
+        `--petal-opacity:${(Math.random() * 0.4 + 0.5).toFixed(2)};`;
+
+      const inner = document.createElement('div');
+      inner.className = 'petal-sway';
+      inner.style.cssText = `--sway:${sway}px;--sway-dur:${swayDur}s;--fall-delay:${delay}s;`;
+
+      const px = Math.round(18 * scale);
+      inner.innerHTML =
+        `<svg viewBox="0 0 24 24" style="width:${px}px;height:${px}px;display:block" xmlns="http://www.w3.org/2000/svg">` +
+          `<path d="M12 2 C18 7 20 14 12 22 C4 14 6 7 12 2 Z" fill="${color}" opacity="0.9"/>` +
+          '<path d="M12 4 C12 10 12 16 12 20" stroke="rgba(255,255,255,0.5)" stroke-width="0.6" fill="none"/>' +
+        '</svg>';
+
+      outer.appendChild(inner);
+      document.body.appendChild(outer);
+      setTimeout(() => outer.remove(), (parseFloat(fallDur) + parseFloat(delay)) * 1000 + 250);
+    }
+  }
+
+  /* Fine gold dust motes lifting off the revealed card */
+  function raiseGoldMotes(folio) {
+    if (!folio) return;
+    const r = folio.getBoundingClientRect();
+
+    for (let i = 0; i < 22; i++) {
+      const mote = document.createElement('div');
+      mote.className = 'gold-mote';
+      mote.setAttribute('aria-hidden', 'true');
+      mote.textContent = '✦';
+      mote.style.cssText =
+        `position:fixed;left:${r.left + Math.random() * r.width}px;` +
+        `top:${r.top + r.height * (0.5 + Math.random() * 0.5)}px;` +
+        'z-index:9998;pointer-events:none;' +
+        `color:${Math.random() > 0.5 ? '#E8C97E' : '#FFF3CC'};` +
+        `font-size:${(Math.random() * 10 + 8).toFixed(1)}px;`;
+
+      document.body.appendChild(mote);
+
+      const tx = (Math.random() - 0.5) * 90;
+      const ty = -(Math.random() * 160 + 60);
       requestAnimationFrame(() => {
-        p.style.transform = `translate(${tx}px, ${ty}px) rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.8 + 0.6})`;
-        p.style.opacity = '0';
+        mote.style.transition =
+          `transform ${(Math.random() * 1.2 + 1.2).toFixed(2)}s ease-out, opacity 1.6s ease-out`;
+        mote.style.transform =
+          `translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px) scale(${(Math.random() * 0.8 + 0.5).toFixed(2)}) rotate(${Math.round(Math.random() * 180)}deg)`;
+        mote.style.opacity = '0';
       });
 
-      setTimeout(() => p.remove(), 1800);
+      setTimeout(() => mote.remove(), 2600);
     }
   }
 

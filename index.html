@@ -184,7 +184,7 @@
             <div class="groom-profile">
               <span class="role-ribbon">The Groom</span>
               <h1 class="couple-name">Amalkar Zulfikar</h1>
-              <p class="lineage-text">Son of Mr. Zulfikar &amp; Mrs. Saheera Beegum<br>New House, Mullathil Wari, Thiruvampady P.O., Alappuzha</p>
+              <p class="lineage-text">Son of Mr. Zulfikar &amp; Mrs. Saheera Beegum<br>New House, Mullathu Ward, Thiruvampady P.O., Alappuzha - 2</p>
             </div>
           </div>
 
@@ -223,10 +223,44 @@
       <h2 class="unveil-section-title">The Sacred Dates &amp; Ceremonies</h2>
       <p class="unveil-section-subtitle">Gently brush across the gilded gold leaf to unveil the sacred Nikah and Reception celebrations.</p>
 
+      <!-- Ornamental Arabesque Divider -->
+      <div class="unveil-ornament-divider" aria-hidden="true">
+        <svg class="ornament-crest" viewBox="0 0 320 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 20 H118" stroke="#C59B3C" stroke-width="1" opacity="0.5"/>
+          <path d="M202 20 H320" stroke="#C59B3C" stroke-width="1" opacity="0.5"/>
+          <circle cx="124" cy="20" r="2.4" fill="#C59B3C" opacity="0.85"/>
+          <circle cx="196" cy="20" r="2.4" fill="#C59B3C" opacity="0.85"/>
+          <path d="M160 5 C167 12 167 26 160 35 C153 26 153 12 160 5 Z" fill="none" stroke="#8F6B20" stroke-width="1.3"/>
+          <path d="M160 11 C164 15 164 25 160 29 C156 25 156 15 160 11 Z" fill="#C59B3C" opacity="0.3"/>
+          <path d="M143 20 Q151 11 160 20 Q169 29 177 20" fill="none" stroke="#C59B3C" stroke-width="0.9" opacity="0.75"/>
+          <path d="M130 20 Q136 14 142 20" fill="none" stroke="#C59B3C" stroke-width="0.8" opacity="0.5"/>
+          <path d="M178 20 Q184 26 190 20" fill="none" stroke="#C59B3C" stroke-width="0.8" opacity="0.5"/>
+        </svg>
+      </div>
+
       <!-- The Grand Interactive Gilded Keepsake Folio Stage -->
       <div class="gilded-folio-stage">
         
-        <div class="gilded-folio-container" id="scratchHolder">
+        <div class="folio-ornate-wrapper">
+
+          <!-- Arabesque Corner Brackets -->
+          <span class="folio-corner folio-corner--tl" aria-hidden="true"></span>
+          <span class="folio-corner folio-corner--tr" aria-hidden="true"></span>
+          <span class="folio-corner folio-corner--bl" aria-hidden="true"></span>
+          <span class="folio-corner folio-corner--br" aria-hidden="true"></span>
+
+          <!-- Hanging Gold Crescent Medallion -->
+          <div class="folio-medallion" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="29" fill="#FFFBF0" stroke="#C59B3C" stroke-width="1.6"/>
+              <circle cx="32" cy="32" r="23" fill="none" stroke="#C59B3C" stroke-width="0.7" stroke-dasharray="2 3" opacity="0.7"/>
+              <circle cx="30" cy="32" r="14" fill="#C59B3C"/>
+              <circle cx="38" cy="32" r="12.5" fill="#FFFBF0"/>
+              <path d="M45 22 l1.5 3.9 3.9 1.5 -3.9 1.5 -1.5 3.9 -1.5 -3.9 -3.9 -1.5 3.9 -1.5 Z" fill="#8F6B20"/>
+            </svg>
+          </div>
+
+          <div class="gilded-folio-container" id="scratchHolder">
           
           <!-- Underlying Ceremonial Folio Content (Revealed upon brushing) -->
           <div class="ceremonial-folio-content" id="scratchContent">
@@ -268,7 +302,7 @@
                 <span class="wing-badge">THE SACRED NIKAH</span>
                 <h3 class="wing-date">Sunday, 29 Nov 2026</h3>
                 <div class="wing-time">12:00 Noon &amp; 12:30 PM</div>
-                <div class="wing-hijri">19th Jumada al-Akhirah 1448</div>
+                <div class="wing-hijri">19th Jum. al-Akhir 1448</div>
                 <div class="wing-loc">Sneha Auditorium, Kadappayil Jn.</div>
                 <p class="wing-note">The sacred Nikah solemnisation followed by traditional festive lunch.</p>
               </div>
@@ -295,7 +329,9 @@
           <!-- HTML5 Canvas: Hand-brushed Liquid 24K Gold Leaf Overlay -->
           <canvas id="luxuryScratchCanvas" class="gilded-canvas-overlay"></canvas>
 
-        </div>
+          </div><!-- /.gilded-folio-container -->
+
+        </div><!-- /.folio-ornate-wrapper -->
 
         <!-- Interactive Feedback & Quick Unveil Action -->
         <div class="scratch-status-bar">
