@@ -743,7 +743,29 @@ document.addEventListener('DOMContentLoaded', () => {
         targetEpoch: new Date('2026-11-29T12:00:00+05:30').getTime(),
         targetText: 'Sunday, 29 November 2026 · Sneha Auditorium, Thevalakara'
       },
-      footerDate: '28 & 29 November 2026 · Thevalakara, Kollam'
+      footerDate: '28 & 29 November 2026 · Thevalakara, Kollam',
+      hero: {
+        tagline: 'Cordially invite your esteemed presence with family on the auspicious occasion of the marriage of our beloved Daughter',
+        hosts: 'Mr. Ibrahim Kutty M & Mrs. Sheeja M P',
+        addressLines: 'Pallickal Puthen Veedu, Palackal, Thevalakara P.O., Kollam',
+        phone: '9847989971',
+        profiles: [
+          {
+            profileClass: 'bride-profile',
+            role: 'The Bride',
+            name: 'Fathima Ibrahim',
+            lineage: 'Granddaughter of Late M. Mytheen Kunju (Kulacha) &amp; Hajira Beevi<br>&amp; Late Mytheen Kunju &amp; Fathima Kunju',
+            insha: false
+          },
+          {
+            profileClass: 'groom-profile',
+            role: 'The Groom',
+            name: 'Amalkar Zulfikar',
+            lineage: 'S/o Mr. Zulfikar &amp; Mrs. Saheera Beegum<br>New House, Mullathu Ward, Thiruvampady P.O., Alappuzha - 2',
+            insha: true
+          }
+        ]
+      }
     },
     groom: {
       wings: {
@@ -790,7 +812,29 @@ document.addEventListener('DOMContentLoaded', () => {
         targetEpoch: new Date('2026-11-30T11:30:00+05:30').getTime(),
         targetText: 'Monday, 30 November 2026 · Shakthi Auditorium, Alappuzha'
       },
-      footerDate: '29 & 30 November 2026 · Alappuzha'
+      footerDate: '29 & 30 November 2026 · Alappuzha',
+      hero: {
+        tagline: 'Cordially invite your esteemed presence with family on the auspicious occasion of the marriage of our beloved Son',
+        hosts: 'Mr. Zulfikar & Mrs. Saheera Zulfikar',
+        addressLines: 'New House, Mullathu Ward, Thiruvampady P.O., Alappuzha - 2',
+        phone: '9447153595',
+        profiles: [
+          {
+            profileClass: 'groom-profile',
+            role: 'The Groom',
+            name: 'Amalkar Zulfikar',
+            lineage: 'S/o Mr. Zulfikar &amp; Mrs. Saheera Beegum<br>New House, Mullathu Ward, Thiruvampady P.O., Alappuzha - 2',
+            insha: false
+          },
+          {
+            profileClass: 'bride-profile',
+            role: 'The Bride',
+            name: 'Fathima Ibrahim',
+            lineage: 'D/o Mr. Ibrahim Kutty. M &amp; Mrs. Sheeja. M. P<br>Pallickal Puthen Veedu, Palackal, Thevalakara P.O., Kollam',
+            insha: true
+          }
+        ]
+      }
     }
   };
 
@@ -981,6 +1025,44 @@ document.addEventListener('DOMContentLoaded', () => {
     activeCountdownEpoch = config.countdown.targetEpoch;
   }
 
+  function applyHeroDetails(partyKey) {
+    const config = PARTY_CONFIG[partyKey] || PARTY_CONFIG.bride;
+    const hero = config.hero;
+    if (!hero) return;
+
+    const tagline = $('#familyTagline');
+    if (tagline) tagline.textContent = hero.tagline;
+
+    const highlight = $('#parentsHighlight');
+    if (highlight) highlight.textContent = hero.hosts;
+
+    const address = $('#parentsAddress');
+    if (address) {
+      address.innerHTML = `${hero.addressLines}<br><a href="tel:${hero.phone}" class="parents-phone">Ph: ${hero.phone}</a>`;
+    }
+
+    const namesBlock = $('#editorialNamesBlock');
+    if (namesBlock && Array.isArray(hero.profiles) && hero.profiles.length === 2) {
+      const profileHTML = (p) => `
+        <div class="${p.profileClass}">
+          <span class="role-ribbon">${p.role}</span>
+          <h1 class="couple-name">${p.name}</h1>
+          <p class="lineage-text">${p.lineage}</p>
+          ${p.insha ? '<p class="insha-allah-tag">“Insha Allah”</p>' : ''}
+        </div>
+      `;
+      namesBlock.innerHTML = `
+        ${profileHTML(hero.profiles[0])}
+        <div class="wedding-knot-conjunction">
+          <span class="knot-flourish">❦</span>
+          <span class="knot-and">and</span>
+          <span class="knot-flourish">❦</span>
+        </div>
+        ${profileHTML(hero.profiles[1])}
+      `;
+    }
+  }
+
   function initDynamicGallery(groupKey) {
     const track = $('.hanging-wire-track');
     if (!track) return;
@@ -1012,6 +1094,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Routing & Dynamic Content
   const currentRoute = resolveInvitationRoute();
   applyPartyDetails(currentRoute.party);
+  applyHeroDetails(currentRoute.party);
   initDynamicGallery(currentRoute.group);
 
   /* ═══════════════════════════════════════════════════════════
