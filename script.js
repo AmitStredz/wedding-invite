@@ -812,10 +812,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Family: 2, 3, 9, 10, 11
     family: [
       { src: 'assets/card-images/2.jpeg',  alt: 'Family Moment 1' },
+      { src: 'assets/card-images/11.png',  alt: 'Family Moment 5' },
       { src: 'assets/card-images/9.png',   alt: 'Family Moment 3' },
       { src: 'assets/card-images/10.png',  alt: 'Family Moment 4' },
       { src: 'assets/card-images/3.jpeg',  alt: 'Family Moment 2' },
-      { src: 'assets/card-images/11.png',  alt: 'Family Moment 5' }
+      { src: 'assets/card-images/12.png',  alt: 'Family Moment 5' }
     ]
   };
 
